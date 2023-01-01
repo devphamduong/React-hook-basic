@@ -1,15 +1,12 @@
-import React from "react";
+import { useEffect } from "react";
 
-class My extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    state = {};
-    render() {
-        return (
-            <div>My</div>
-        );
-    }
+function My() {
+    useEffect(() => {
+
+    }, []);
+    return (
+        <div>My</div>
+    );
 }
 
 export default My;
