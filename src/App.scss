@@ -7,3 +7,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   box-sizing             : border-box;
 }
+
+.app-container {
+  .header-container {
+    .navbar-nav {
+      .nav-link {
+        &.active {
+          color: #00bfff;
+        }
+      }
+    }
+  }
+}
