@@ -1,13 +1,14 @@
-import { useState } from "react";
+import _ from "lodash";
+import { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from "react-toastify";
 import { createUser } from '../../../services/apiServices';
 
-function ModalCreateUser(props) {
+function ModalUpdateUser(props) {
 
-    const { show, setShow } = props;
+    const { show, setShow, userUpdate } = props;
     const handleClose = () => {
         setShow(false);
         setEmail('');
@@ -25,6 +26,18 @@ function ModalCreateUser(props) {
     const [image, setImage] = useState('');
     const [previewImg, setPreviewImg] = useState('');
 
+    useEffect(() => {
+        if (!_.isEmpty(userUpdate)) {
+            setEmail(userUpdate.email);
+            setPassword(`Don't even think about that!`);
+            setUsername(userUpdate.username);
+            setRole(userUpdate.role);
+            if (userUpdate.image) {
+                setPreviewImg(`data:image/jpeg;base64,${userUpdate.image}`);
+            }
+        }
+    }, [userUpdate]);
+
     const handleUploadImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
             setPreviewImg(URL.createObjectURL(event.target.files[0]));
@@ -33,16 +46,6 @@ function ModalCreateUser(props) {
     };
 
     const handleCreateUser = async () => {
-        const isValidEmail = validateEmail(email);
-        if (!isValidEmail) {
-            toast.error("Invalid email!");
-            return;
-        }
-        if (!password) {
-            toast.error("Invalid password!");
-            return;
-        }
-
         let data = await createUser(email, password, username, role, image);
         if (data && data.EC === 0) {
             toast.success(data.EM);
@@ -53,21 +56,17 @@ function ModalCreateUser(props) {
         }
     };
 
-    const validateEmail = (email) => {
-        return String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-    };
-
     return (
         <>
             <Modal className="modal-add-user" show={show} onHide={handleClose} size='xl' backdrop='static'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add new user</Modal.Title>
+                    <Modal.Title>Update user</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
                         <div className="col-md-6">
                             <label className="form-label">Email</label>
-                            <input type="email" className="form-control" value={email} onChange={(event) => setEmail(event.target.value)} />
+                            <input type="email" disabled className="form-control" value={email} />
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Username</label>
@@ -75,7 +74,7 @@ function ModalCreateUser(props) {
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Password</label>
-                            <input type="password" className="form-control" value={password} onChange={(event) => setPassword(event.target.value)} />
+                            <input type="password" disabled className="form-control" value={password} />
                         </div>
                         <div className="col-md-4">
                             <label className="form-label">Role</label>
@@ -110,4 +109,4 @@ function ModalCreateUser(props) {
     );
 }
 
-export default ModalCreateUser;
+export default ModalUpdateUser;
