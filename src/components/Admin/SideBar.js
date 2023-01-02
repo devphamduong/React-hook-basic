@@ -1,15 +1,12 @@
 import 'react-pro-sidebar/dist/css/styles.css';
 import {
-    ProSidebar,
-    Menu,
-    MenuItem,
-    SubMenu,
-    SidebarHeader,
-    SidebarFooter,
-    SidebarContent,
+    ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent,
 } from 'react-pro-sidebar';
 import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
 import sidebarBg from '../../assets/bg2.jpg';
+import { DiReact } from 'react-icons/di';
+import { MdDashboard } from 'react-icons/md';
+import './SideBar.scss';
 
 function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
     return (
@@ -34,29 +31,34 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                             whiteSpace: 'nowrap',
                         }}
                     >
-                        Phạm Chu Dương
+                        <div className='sidebar-header'>
+                            {collapsed ?
+                                <DiReact size={'3em'} color={'00bfff'} /> :
+                                <>
+                                    <DiReact size={'3em'} color={'00bfff'} />
+                                    <span>Pham Chu Duong</span>
+                                </>
+                            }
+                        </div>
                     </div>
                 </SidebarHeader>
 
                 <SidebarContent>
                     <Menu iconShape="circle">
                         <MenuItem
-                            icon={<FaTachometerAlt />}
-                            suffix={<span className="badge red">New</span>}
+                            icon={<MdDashboard />}
                         >
                             Dashboard
                         </MenuItem>
-                        <MenuItem icon={<FaGem />}>Components</MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
                         <SubMenu
-                            suffix={<span className="badge yellow">3</span>}
-                            title='withSuffix'
-                            icon={<FaRegLaughWink />}
+                            icon={<FaGem />}
+                            title='Features'
                         >
-                            <MenuItem>1</MenuItem>
-                            <MenuItem>2</MenuItem>
-                            <MenuItem>3</MenuItem>
+                            <MenuItem>Quản lý User</MenuItem>
+                            <MenuItem>Quản lý Bài Quiz</MenuItem>
+                            <MenuItem>Quản lý Câu Hỏi</MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>
@@ -69,14 +71,19 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                         }}
                     >
                         <a
-                            href="https://github.com/azouaoui-med/react-pro-sidebar"
+                            href="https://github.com/phamduongdev"
                             target="_blank"
                             className="sidebar-btn"
                             rel="noopener noreferrer"
                         >
-                            <FaGithub />
-                            <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>
-                            </span>
+                            {collapsed ?
+                                <FaGithub /> :
+                                <>
+                                    <FaGithub />
+                                    <span style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}>phamduongdev
+                                    </span>
+                                </>
+                            }
                         </a>
                     </div>
                 </SidebarFooter>
