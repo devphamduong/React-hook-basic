@@ -1,19 +1,29 @@
+import axios from "axios";
 import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
+import { toast } from "react-toastify";
 
-function ModalCreateUser() {
+function ModalCreateUser(props) {
 
-    const [show, setShow] = useState(false);
+    const { show, setShow } = props;
+    const handleClose = () => {
+        setShow(false);
+        setEmail('');
+        setPassword('');
+        setUsername('');
+        setRole('USER');
+        setPreviewImg('');
+        setImage('');
+    };
+    const handleShow = () => setShow(true);
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('USER');
     const [image, setImage] = useState('');
     const [previewImg, setPreviewImg] = useState('');
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
 
     const handleUploadImage = (event) => {
         if (event.target && event.target.files && event.target.files[0]) {
@@ -22,9 +32,24 @@ function ModalCreateUser() {
         }
     };
 
+    const handleCreateUser = async () => {
+        const form = new FormData();
+        form.append('email', email);
+        form.append('password', password);
+        form.append('username', username);
+        form.append('role', role);
+        form.append('userImage', image);
+        let res = await axios.post('http://localhost:8081/api/v1/participant', form);
+        if (res && res.EC === 0) {
+            toast.success('Create user successfully!');
+        } else {
+            toast.error('Something wrong...');
+        }
+    };
+
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>Add user</Button>
+            {/* <Button variant="primary" onClick={handleShow}>Add user</Button> */}
             <Modal className="modal-add-user" show={show} onHide={handleClose} size='xl' backdrop='static'>
                 <Modal.Header closeButton>
                     <Modal.Title>Add new user</Modal.Title>
@@ -67,8 +92,8 @@ function ModalCreateUser() {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                    <Button variant="primary" onClick={() => handleCreateUser()}>
+                        Create user
                     </Button>
                 </Modal.Footer>
             </Modal>

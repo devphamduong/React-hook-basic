@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import ModalCreateUser from './ModalCreateUser';
+import { FcPlus } from 'react-icons/fc';
 import './ManageUser.scss';
 
 function ManageUser(props) {
 
-
+    const [showModal, setShowModal] = useState(false);
 
     return (
         <>
@@ -12,12 +13,12 @@ function ManageUser(props) {
                 <div className="title">Manage User</div>
                 <div className="manage-user-content">
                     <div>
-                        <button>Add new user</button>
+                        <button className='btn-add-new btn btn-primary' onClick={() => setShowModal(true)}><FcPlus /><span>Add new user</span></button>
                     </div>
-                    <div>
+                    <div className='table-user'>
                         table
                     </div>
-                    <ModalCreateUser />
+                    <ModalCreateUser show={showModal} setShow={setShowModal} />
                 </div>
             </div>
         </>
