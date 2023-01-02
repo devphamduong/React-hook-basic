@@ -4,11 +4,11 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from "react-toastify";
-import { createUser } from '../../../services/apiServices';
+import { updateUser } from '../../../services/apiServices';
 
 function ModalUpdateUser(props) {
 
-    const { show, setShow, userUpdate } = props;
+    const { show, setShow, userUpdate, resetUpdateData } = props;
     const handleClose = () => {
         setShow(false);
         setEmail('');
@@ -17,6 +17,7 @@ function ModalUpdateUser(props) {
         setRole('USER');
         setPreviewImg('');
         setImage('');
+        resetUpdateData();
     };
     const handleShow = () => setShow(true);
     const [email, setEmail] = useState('');
@@ -46,7 +47,7 @@ function ModalUpdateUser(props) {
     };
 
     const handleCreateUser = async () => {
-        let data = await createUser(email, password, username, role, image);
+        let data = await updateUser(userUpdate.id, username, role, image);
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();
@@ -101,7 +102,7 @@ function ModalUpdateUser(props) {
                         Close
                     </Button>
                     <Button variant="primary" onClick={() => handleCreateUser()}>
-                        Create user
+                        Save changes
                     </Button>
                 </Modal.Footer>
             </Modal>
