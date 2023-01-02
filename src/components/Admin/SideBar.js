@@ -2,11 +2,12 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import {
     ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent,
 } from 'react-pro-sidebar';
-import { FaTachometerAlt, FaGem, FaList, FaGithub, FaRegLaughWink, FaHeart } from 'react-icons/fa';
+import { FaGem, FaGithub } from 'react-icons/fa';
 import sidebarBg from '../../assets/bg2.jpg';
 import { DiReact } from 'react-icons/di';
 import { MdDashboard } from 'react-icons/md';
 import './SideBar.scss';
+import { Link } from 'react-router-dom';
 
 function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
     return (
@@ -49,6 +50,7 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                             icon={<MdDashboard />}
                         >
                             Dashboard
+                            <Link to={'/admin'} />
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
@@ -56,9 +58,9 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                             icon={<FaGem />}
                             title='Features'
                         >
-                            <MenuItem>Quản lý User</MenuItem>
-                            <MenuItem>Quản lý Bài Quiz</MenuItem>
-                            <MenuItem>Quản lý Câu Hỏi</MenuItem>
+                            <MenuItem>Quản lý User<Link to={'/admin/manage-user'} /></MenuItem>
+                            <MenuItem>Quản lý Bài Quiz<Link to={'/admin/manage-user'} /></MenuItem>
+                            <MenuItem>Quản lý Câu Hỏi<Link to={'/admin/manage-user'} /></MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>
