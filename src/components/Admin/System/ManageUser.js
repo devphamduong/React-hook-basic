@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ModalCreateUser from './ModalCreateUser';
+import './ManageUser.scss';
 
 function ManageUser(props) {
 
@@ -15,8 +16,8 @@ function ManageUser(props) {
                     </div>
                     <div>
                         table
-                        <ModalCreateUser />
                     </div>
+                    <ModalCreateUser />
                 </div>
             </div>
         </>
