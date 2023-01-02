@@ -33,6 +33,15 @@ function ModalCreateUser(props) {
     };
 
     const handleCreateUser = async () => {
+        const isValidEmail = validateEmail(email);
+        if (!isValidEmail) {
+            toast.error("Invalid email!");
+            return;
+        }
+        if (!password) {
+            toast.error("Invalid password!");
+            return;
+        }
         const form = new FormData();
         form.append('email', email);
         form.append('password', password);
@@ -40,11 +49,16 @@ function ModalCreateUser(props) {
         form.append('role', role);
         form.append('userImage', image);
         let res = await axios.post('http://localhost:8081/api/v1/participant', form);
-        if (res && res.EC === 0) {
-            toast.success('Create user successfully!');
-        } else {
-            toast.error('Something wrong...');
+        if (res.data && res.data.EC === 0) {
+            toast.success(res.data.EM);
+            handleClose();
+        } else if (res.data && res.data.EC !== 0) {
+            toast.error(res.data.EM);
         }
+    };
+
+    const validateEmail = (email) => {
+        return String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     };
 
     return (
