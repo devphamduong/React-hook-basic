@@ -2,6 +2,7 @@ import { useState } from 'react';
 import ModalCreateUser from './ModalCreateUser';
 import { FcPlus } from 'react-icons/fc';
 import './ManageUser.scss';
+import TableUser from './TableUser';
 
 function ManageUser(props) {
 
@@ -16,7 +17,7 @@ function ManageUser(props) {
                         <button className='btn-add-new btn btn-primary' onClick={() => setShowModal(true)}><FcPlus /><span>Add new user</span></button>
                     </div>
                     <div className='table-user'>
-                        table
+                        <TableUser />
                     </div>
                     <ModalCreateUser show={showModal} setShow={setShowModal} />
                 </div>
