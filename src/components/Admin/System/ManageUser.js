@@ -5,11 +5,13 @@ import './ManageUser.scss';
 import TableUser from './TableUser';
 import { getAllUsers } from "../../../services/apiServices";
 import ModalUpdateUser from './ModalUpdateUser';
+import ModalViewUser from './ModalViewUser';
 
 function ManageUser(props) {
 
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
+    const [showModalView, setShowModalView] = useState(false);
     const [listUsers, setListUsers] = useState([]);
     const [userUpdate, setUserUpdate] = useState({});
 
@@ -29,6 +31,11 @@ function ManageUser(props) {
         setUserUpdate(user);
     };
 
+    const handleClickBtnView = (user) => {
+        setShowModalView(true);
+        setUserUpdate(user);
+    };
+
     const resetUpdateData = () => {
         setUserUpdate({});
     };
@@ -42,10 +49,11 @@ function ManageUser(props) {
                         <button className='btn-add-new btn btn-primary' onClick={() => setShowModalCreate(true)}><FcPlus /><span>Add new user</span></button>
                     </div>
                     <div className='table-user'>
-                        <TableUser listUsers={listUsers} handleClickBtnUpdate={handleClickBtnUpdate} />
+                        <TableUser listUsers={listUsers} handleClickBtnUpdate={handleClickBtnUpdate} handleClickBtnView={handleClickBtnView} />
                     </div>
                     <ModalCreateUser show={showModalCreate} setShow={setShowModalCreate} fetchAllUsers={fetchAllUsers} />
                     <ModalUpdateUser show={showModalUpdate} setShow={setShowModalUpdate} fetchAllUsers={fetchAllUsers} userUpdate={userUpdate} resetUpdateData={resetUpdateData} />
+                    <ModalViewUser show={showModalView} setShow={setShowModalView} userUpdate={userUpdate} resetUpdateData={resetUpdateData} />
                 </div>
             </div>
         </>

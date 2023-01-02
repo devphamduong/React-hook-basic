@@ -2,11 +2,8 @@ import _ from "lodash";
 import { useEffect, useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { FcPlus } from 'react-icons/fc';
-import { toast } from "react-toastify";
-import { updateUser } from '../../../services/apiServices';
 
-function ModalUpdateUser(props) {
+function ModalViewUser(props) {
 
     const { show, setShow, userUpdate, resetUpdateData } = props;
     const handleClose = () => {
@@ -16,7 +13,6 @@ function ModalUpdateUser(props) {
         setUsername('');
         setRole('USER');
         setPreviewImg('');
-        setImage('');
         resetUpdateData();
     };
     const handleShow = () => setShow(true);
@@ -24,7 +20,6 @@ function ModalUpdateUser(props) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('USER');
-    const [image, setImage] = useState('');
     const [previewImg, setPreviewImg] = useState('');
 
     useEffect(() => {
@@ -39,29 +34,11 @@ function ModalUpdateUser(props) {
         }
     }, [userUpdate]);
 
-    const handleUploadImage = (event) => {
-        if (event.target && event.target.files && event.target.files[0]) {
-            setPreviewImg(URL.createObjectURL(event.target.files[0]));
-            setImage(event.target.files[0]);
-        }
-    };
-
-    const handleUpdateUser = async () => {
-        let data = await updateUser(userUpdate.id, username, role, image);
-        if (data && data.EC === 0) {
-            toast.success(data.EM);
-            handleClose();
-            await props.fetchAllUsers();
-        } else if (data && data.EC !== 0) {
-            toast.error(data.EM);
-        }
-    };
-
     return (
         <>
             <Modal className="modal-add-user" show={show} onHide={handleClose} size='xl' backdrop='static'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update user</Modal.Title>
+                    <Modal.Title>User information</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
@@ -71,7 +48,7 @@ function ModalUpdateUser(props) {
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Username</label>
-                            <input type="text" className="form-control" value={username} onChange={(event) => setUsername(event.target.value)} />
+                            <input type="text" disabled className="form-control" value={username} onChange={(event) => setUsername(event.target.value)} />
                         </div>
                         <div className="col-md-6">
                             <label className="form-label">Password</label>
@@ -79,14 +56,10 @@ function ModalUpdateUser(props) {
                         </div>
                         <div className="col-md-4">
                             <label className="form-label">Role</label>
-                            <select className="form-select" value={role} onChange={(event) => setRole(event.target.value)}>
+                            <select className="form-select" disabled value={role} onChange={(event) => setRole(event.target.value)}>
                                 <option value={'USER'}>USER</option>
                                 <option value={'ADMIN'}>ADMIN</option>
                             </select>
-                        </div>
-                        <div className="col-md-12">
-                            <label className="form-label label-upload" htmlFor="labelUpload"><FcPlus /><span>Upload File Image</span></label>
-                            <input type="file" hidden id="labelUpload" onChange={(event) => handleUploadImage(event)} />
                         </div>
                         <div className="col-md-12 img-preview">
                             {previewImg ?
@@ -101,13 +74,10 @@ function ModalUpdateUser(props) {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={() => handleUpdateUser()}>
-                        Save changes
-                    </Button>
                 </Modal.Footer>
             </Modal>
         </>
     );
 }
 
-export default ModalUpdateUser;
+export default ModalViewUser;
