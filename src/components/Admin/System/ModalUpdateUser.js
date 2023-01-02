@@ -8,7 +8,7 @@ import { updateUser } from '../../../services/apiServices';
 
 function ModalUpdateUser(props) {
 
-    const { show, setShow, userUpdate, resetUpdateData } = props;
+    const { show, setShow, userUpdate, resetUpdateData, currentPage } = props;
     const handleClose = () => {
         setShow(false);
         setEmail('');
@@ -51,7 +51,7 @@ function ModalUpdateUser(props) {
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();
-            await props.fetchAllUsers();
+            await props.fetchAllUsersPaginate(currentPage);
         } else if (data && data.EC !== 0) {
             toast.error(data.EM);
         }

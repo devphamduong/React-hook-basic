@@ -3,12 +3,13 @@ import ReactPaginate from "react-paginate";
 
 function TableUserPaginate(props) {
 
-    const { listUsers, pageCount } = props;
+    const { listUsers, pageCount, setCurrentPage } = props;
 
 
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
         props.fetchAllUsersPaginate(+event.selected + 1);
+        setCurrentPage(+event.selected + 1);
     };
 
     return (

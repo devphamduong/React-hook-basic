@@ -19,6 +19,7 @@ function ManageUser(props) {
     const [listUsers, setListUsers] = useState([]);
     const [userUpdate, setUserUpdate] = useState({});
     const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         // fetchAllUsers();
@@ -71,12 +72,12 @@ function ManageUser(props) {
                         {/* <TableUser listUsers={listUsers} handleClickBtnUpdate={handleClickBtnUpdate} handleClickBtnView={handleClickBtnView} handleClickBtnDelete={handleClickBtnDelete} /> */}
                         <TableUserPaginate listUsers={listUsers} handleClickBtnUpdate={handleClickBtnUpdate} handleClickBtnView={handleClickBtnView} handleClickBtnDelete={handleClickBtnDelete}
                             fetchAllUsersPaginate={fetchAllUsersPaginate}
-                            pageCount={pageCount} />
+                            pageCount={pageCount} setCurrentPage={setCurrentPage} />
                     </div>
-                    <ModalCreateUser show={showModalCreate} setShow={setShowModalCreate} fetchAllUsers={fetchAllUsers} />
-                    <ModalUpdateUser show={showModalUpdate} setShow={setShowModalUpdate} fetchAllUsers={fetchAllUsers} userUpdate={userUpdate} resetUpdateData={resetUpdateData} />
+                    <ModalCreateUser show={showModalCreate} setShow={setShowModalCreate} fetchAllUsersPaginate={fetchAllUsersPaginate} />
+                    <ModalUpdateUser show={showModalUpdate} setShow={setShowModalUpdate} fetchAllUsersPaginate={fetchAllUsersPaginate} userUpdate={userUpdate} resetUpdateData={resetUpdateData} currentPage={currentPage} />
                     <ModalViewUser show={showModalView} setShow={setShowModalView} userUpdate={userUpdate} resetUpdateData={resetUpdateData} />
-                    <ModalDeleteUser show={showModalDelete} setShow={setShowModalDelete} fetchAllUsers={fetchAllUsers} userUpdate={userUpdate} />
+                    <ModalDeleteUser show={showModalDelete} setShow={setShowModalDelete} fetchAllUsersPaginate={fetchAllUsersPaginate} userUpdate={userUpdate} currentPage={currentPage} />
                 </div>
             </div>
         </>
