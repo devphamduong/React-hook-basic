@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { login } from '../../services/apiServices';
+import { doLogin } from '../../redux/action/userAction';
 import './Login.scss';
 
 function Login(props) {
@@ -9,6 +11,7 @@ function Login(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleLogin = async () => {
         const isValidEmail = validateEmail(email);
@@ -22,6 +25,7 @@ function Login(props) {
         }
         let data = await login(email, password);
         if (data && data.EC === 0) {
+            dispatch(doLogin(data));
             toast.success(data.EM);
             navigate('/');
         } else if (data && data.EC !== 0) {
