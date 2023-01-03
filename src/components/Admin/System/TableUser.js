@@ -17,7 +17,7 @@ function TableUser(props) {
                 <tbody>
                     {listUsers && listUsers.length === 0 &&
                         <tr>
-                            <td colSpan={4}>Not found data</td>
+                            <td colSpan={5}>Not found data</td>
                         </tr>
                     }
                     {listUsers && listUsers.length > 0 &&
