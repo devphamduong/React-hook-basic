@@ -7,7 +7,7 @@ import { createUser } from '../../../services/apiServices';
 
 function ModalCreateUser(props) {
 
-    const { show, setShow } = props;
+    const { show, setShow, setCurrentPage } = props;
     const handleClose = () => {
         setShow(false);
         setEmail('');
@@ -47,6 +47,7 @@ function ModalCreateUser(props) {
         if (data && data.EC === 0) {
             toast.success(data.EM);
             handleClose();
+            setCurrentPage(1);
             await props.fetchAllUsersPaginate(1);
         } else if (data && data.EC !== 0) {
             toast.error(data.EM);

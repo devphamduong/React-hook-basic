@@ -72,12 +72,12 @@ function ManageUser(props) {
                         {/* <TableUser listUsers={listUsers} handleClickBtnUpdate={handleClickBtnUpdate} handleClickBtnView={handleClickBtnView} handleClickBtnDelete={handleClickBtnDelete} /> */}
                         <TableUserPaginate listUsers={listUsers} handleClickBtnUpdate={handleClickBtnUpdate} handleClickBtnView={handleClickBtnView} handleClickBtnDelete={handleClickBtnDelete}
                             fetchAllUsersPaginate={fetchAllUsersPaginate}
-                            pageCount={pageCount} setCurrentPage={setCurrentPage} />
+                            pageCount={pageCount} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                     </div>
-                    <ModalCreateUser show={showModalCreate} setShow={setShowModalCreate} fetchAllUsersPaginate={fetchAllUsersPaginate} />
+                    <ModalCreateUser show={showModalCreate} setShow={setShowModalCreate} fetchAllUsersPaginate={fetchAllUsersPaginate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                     <ModalUpdateUser show={showModalUpdate} setShow={setShowModalUpdate} fetchAllUsersPaginate={fetchAllUsersPaginate} userUpdate={userUpdate} resetUpdateData={resetUpdateData} currentPage={currentPage} />
                     <ModalViewUser show={showModalView} setShow={setShowModalView} userUpdate={userUpdate} resetUpdateData={resetUpdateData} />
-                    <ModalDeleteUser show={showModalDelete} setShow={setShowModalDelete} fetchAllUsersPaginate={fetchAllUsersPaginate} userUpdate={userUpdate} currentPage={currentPage} />
+                    <ModalDeleteUser show={showModalDelete} setShow={setShowModalDelete} fetchAllUsersPaginate={fetchAllUsersPaginate} userUpdate={userUpdate} currentPage={currentPage} setCurrentPage={setCurrentPage} />
                 </div>
             </div>
         </>
