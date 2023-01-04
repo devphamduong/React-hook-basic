@@ -1,3 +1,13 @@
+.sidebar-header {
+    span {
+        cursor: pointer;
+
+        &:hover {
+            color: white;
+        }
+    }
+}
+
 .sidebar-btn-wrapper {
     display        : flex;
     align-items    : center;

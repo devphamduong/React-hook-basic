@@ -3,7 +3,7 @@ import ModalCreateUser from './ModalCreateUser';
 import { FcPlus } from 'react-icons/fc';
 import './ManageUser.scss';
 import TableUser from './TableUser';
-import { getAllUsers, getUserPaginate } from "../../../services/apiServices";
+import { getAllUsers, getUserPaginate } from "../../../../services/apiServices";
 import ModalUpdateUser from './ModalUpdateUser';
 import ModalViewUser from './ModalViewUser';
 import ModalDeleteUser from './ModalDeleteUser';

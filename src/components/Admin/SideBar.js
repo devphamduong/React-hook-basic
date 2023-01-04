@@ -1,15 +1,16 @@
 import 'react-pro-sidebar/dist/css/styles.css';
-import {
-    ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent,
-} from 'react-pro-sidebar';
+import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import { FaGem, FaGithub } from 'react-icons/fa';
 import sidebarBg from '../../assets/bg2.jpg';
 import { DiReact } from 'react-icons/di';
 import { MdDashboard } from 'react-icons/md';
 import './SideBar.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
+
+    const navigate = useNavigate();
+
     return (
         <>
             <ProSidebar
@@ -37,7 +38,7 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                                 <DiReact size={'3em'} color={'00bfff'} /> :
                                 <>
                                     <DiReact size={'3em'} color={'00bfff'} />
-                                    <span>Pham Chu Duong</span>
+                                    <span onClick={() => { navigate('/'); }}>Pham Chu Duong</span>
                                 </>
                             }
                         </div>
@@ -58,9 +59,9 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                             icon={<FaGem />}
                             title='Features'
                         >
-                            <MenuItem>Quản lý User<Link to={'/admin/manage-user'} /></MenuItem>
-                            <MenuItem>Quản lý Bài Quiz<Link to={'/admin/manage-user'} /></MenuItem>
-                            <MenuItem>Quản lý Câu Hỏi<Link to={'/admin/manage-user'} /></MenuItem>
+                            <MenuItem>Quản lý User<Link to={'/admin/manage-users'} /></MenuItem>
+                            <MenuItem>Quản lý Bài Quiz<Link to={'/admin/manage-quizzes'} /></MenuItem>
+                            <MenuItem>Quản lý Câu Hỏi<Link to={'/admin/manage-questions'} /></MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>

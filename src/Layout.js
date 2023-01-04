@@ -1,7 +1,7 @@
 import App from './App';
 import Admin from './components/Admin/Admin';
 import HomePage from './components/Home/HomePage';
-import ManageUser from './components/Admin/System/ManageUser';
+import ManageUser from './components/Admin/System/User/ManageUser';
 import DashBoard from './components/Admin/System/DashBoard';
 import Login from './components/Auth/Login';
 import { Routes, Route } from 'react-router-dom';
@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Register from './components/Auth/Register';
 import ListQuiz from './components/User/ListQuiz';
 import DetailQuiz from './components/User/DetailQuiz';
+import ManageQuiz from './components/Admin/System/Quiz/ManageQuiz';
 
 const NotFound = () => {
     return (
@@ -28,7 +29,9 @@ function Layout(props) {
                 <Route path='/quiz:id' element={<DetailQuiz />}></Route>
                 <Route path='/admin' element={<Admin />}>
                     <Route index element={<DashBoard />}></Route>
-                    <Route path='manage-user' element={<ManageUser />}></Route>
+                    <Route path='manage-users' element={<ManageUser />}></Route>
+                    <Route path='manage-quizzes' element={<ManageQuiz />}></Route>
+                    <Route path='manage-questions' element={<ManageQuiz />}></Route>
                 </Route>
                 <Route path='/login' element={<Login />}></Route>
                 <Route path='/register' element={<Register />}></Route>
