@@ -41,6 +41,7 @@ function DetailQuiz(props) {
                             questionDescription = item.description;
                             image = item.image;
                         }
+                        item.answers.isSelected = false;
                         answers.push(item.answers);
                     });
                     return { questionId: key, answers, questionDescription, image };
@@ -66,6 +67,25 @@ function DetailQuiz(props) {
         }
     };
 
+    const handleCheckAns = (answerId, questionId) => {
+        let dataQuizClone = _.cloneDeep(dataQuiz);
+        let question = dataQuizClone.find(item => +item.questionId === +questionId);
+        if (question && question.answers) {
+            let b = question.answers.map((item) => {
+                if (item.id === +answerId) {
+                    item.isSelected = !item.isSelected;
+                }
+                return item;
+            });
+            question.answers = b;
+        }
+        let index = dataQuizClone.findIndex(item => +item.questionId === +questionId);
+        if (index > -1) {
+            dataQuizClone[index] = question;
+            setDataQuiz(dataQuizClone);
+        }
+    };
+
     return (
         <div className='detail-quiz-container'>
             <div className='left'>
@@ -74,11 +94,12 @@ function DetailQuiz(props) {
                 </div>
                 <hr></hr>
                 <div className='question-content'>
-                    <Question dataQuiz={dataQuiz && dataQuiz.length > 0 ? dataQuiz[currentQuestion] : []} currentQuestion={currentQuestion} />
+                    <Question dataQuiz={dataQuiz && dataQuiz.length > 0 ? dataQuiz[currentQuestion] : []} currentQuestion={currentQuestion} handleCheckAns={handleCheckAns} />
                 </div>
                 <div className='question-footer'>
                     <button className='btn btn-secondary' disabled={btnPrevDisabled} onClick={() => handlePrev()}>Prev</button>
                     <button className='btn btn-primary' disabled={btnNextDisabled} onClick={() => handleNext()}>Next</button>
+                    <button className='btn btn-warning' disabled={btnNextDisabled} onClick={() => handleNext()}>Finish</button>
                 </div>
             </div>
             <div className='right'>
