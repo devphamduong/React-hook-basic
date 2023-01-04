@@ -16,6 +16,13 @@
                 font-size  : 20px;
                 font-weight: 600;
             }
+
+            .question-image {
+                img {
+                    width : 300px;
+                    height: 200px;
+                }
+            }
         }
 
         .question-footer {
@@ -23,6 +30,13 @@
             align-items    : center;
             justify-content: center;
             gap            : 15px;
+
+            button {
+                &:disabled {
+                    pointer-events: unset !important;
+                    cursor        : no-drop !important;
+                }
+            }
         }
     }
 
