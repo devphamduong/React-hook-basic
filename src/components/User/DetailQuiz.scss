@@ -1,0 +1,32 @@
+.detail-quiz-container {
+    display: flex;
+    gap    : 20px;
+    padding: 50px;
+
+    .left {
+        width: 70%;
+
+        .title {
+            font-size  : 30px;
+            font-weight: 600;
+        }
+
+        .question-content {
+            .question {
+                font-size  : 20px;
+                font-weight: 600;
+            }
+        }
+
+        .question-footer {
+            display        : flex;
+            align-items    : center;
+            justify-content: center;
+            gap            : 15px;
+        }
+    }
+
+    .right {
+        width: 30%;
+    }
+}
