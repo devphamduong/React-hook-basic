@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import { getAllQuizAdmin } from "../../../../services/apiServices";
+import ModalDeleteQuiz from "./ModalDeleteQuiz";
+import ModalUpdateQuiz from "./ModalUpdateQuiz";
 
 function TableQuiz(props) {
 
     const [listQuiz, setListQuiz] = useState([]);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
+    const [showModalDelete, setShowModalDelete] = useState(false);
+    const [dataQuiz, setDataQuiz] = useState({});
 
     useEffect(() => {
         getAllQuiz();
@@ -14,6 +19,16 @@ function TableQuiz(props) {
         if (res && res.EC === 0) {
             setListQuiz(res.DT);
         }
+    };
+
+    const handleClickBtnUpdate = (item) => {
+        setShowModalUpdate(true);
+        setDataQuiz(item);
+    };
+
+    const handleClickBtnDelete = (item) => {
+        setShowModalDelete(true);
+        setDataQuiz(item);
     };
 
     return (
@@ -46,8 +61,8 @@ function TableQuiz(props) {
                                     <td>{item.description}</td>
                                     <td>{item.difficulty}</td>
                                     <td>
-                                        <button className="btn btn-warning mx-3" onClick={() => props.handleClickBtnUpdate(item)}>Update</button>
-                                        <button className="btn btn-danger" onClick={() => props.handleClickBtnDelete(item)}>Delete</button>
+                                        <button className="btn btn-warning mx-3" onClick={() => handleClickBtnUpdate(item)}>Update</button>
+                                        <button className="btn btn-danger" onClick={() => handleClickBtnDelete(item)}>Delete</button>
                                     </td>
                                 </tr>
                             );
@@ -55,6 +70,8 @@ function TableQuiz(props) {
                     }
                 </tbody>
             </table>
+            <ModalUpdateQuiz show={showModalUpdate} setShow={setShowModalUpdate} dataQuiz={dataQuiz} setDataQuiz={setDataQuiz} getAllQuiz={getAllQuiz} />
+            <ModalDeleteQuiz show={showModalDelete} setShow={setShowModalDelete} dataQuiz={dataQuiz} getAllQuiz={getAllQuiz} />
         </>
     );
 }
