@@ -17,13 +17,13 @@ function Questions(props) {
         [
             {
                 id: uuidv4(),
-                description: 'question 1',
-                image: '',
+                description: '',
+                imageFile: '',
                 imageName: '',
                 answers: [
                     {
                         id: uuidv4(),
-                        description: 'answer 1',
+                        description: '',
                         isCorrect: false
                     }
                 ]
@@ -31,13 +31,52 @@ function Questions(props) {
         ]
     );
 
+    const handleOnChange = (questionId, answerId, type, value) => {
+        if (type === 'QUESTION') {
+            let copiedQuestions = _.cloneDeep(questions);
+            let index = copiedQuestions.findIndex(item => item.id === questionId);
+            if (index > -1) {
+                copiedQuestions[index].description = value;
+                setQuestions(copiedQuestions);
+            }
+        }
+    };
+
+    const handleOnChangeFileQuestion = (questionId, event) => {
+        let copiedQuestions = _.cloneDeep(questions);
+        let index = copiedQuestions.findIndex(item => item.id === questionId);
+        if (index > -1 && event.target && event.target.files && event.target.files[0]) {
+            copiedQuestions[index].imageFile = event.target.files[0];
+            copiedQuestions[index].imageName = event.target.files[0].name;
+            setQuestions(copiedQuestions);
+        }
+    };
+
+    const handleAnswerQuestion = (type, questionId, answerId, value) => {
+        let copiedQuestions = _.cloneDeep(questions);
+        let index = copiedQuestions.findIndex(item => item.id === questionId);
+        if (index > -1) {
+            copiedQuestions[index].answers = copiedQuestions[index].answers.map(answer => {
+                if (answer.id === answerId) {
+                    if (type === 'CHECKBOX') {
+                        answer.isCorrect = value;
+                    } else if (type === 'INPUT') {
+                        answer.description = value;
+                    }
+                }
+                return answer;
+            });
+            setQuestions(copiedQuestions);
+        }
+    };
+
     const handleAddRemoveQuestion = (answerId, type) => {
         if (type === 'ADD') {
             const newQuestion =
             {
                 id: uuidv4(),
                 description: '',
-                image: '',
+                imageFile: '',
                 imageName: '',
                 answers: [
                     {
@@ -65,13 +104,21 @@ function Questions(props) {
                 isCorrect: false
             };
             let index = copiedQuestions.findIndex(item => item.id === questionId);
-            copiedQuestions[index].answers.push(newAnswer);
-            setQuestions(copiedQuestions);
+            if (index > -1) {
+                copiedQuestions[index].answers.push(newAnswer);
+                setQuestions(copiedQuestions);
+            }
         } else if (type === 'REMOVE') {
             let index = copiedQuestions.findIndex(item => item.id === questionId);
-            copiedQuestions[index].answers = copiedQuestions[index].answers.filter(item => item.id !== answerId);
-            setQuestions(copiedQuestions);
+            if (index > -1) {
+                copiedQuestions[index].answers = copiedQuestions[index].answers.filter(item => item.id !== answerId);
+                setQuestions(copiedQuestions);
+            }
         }
+    };
+
+    const handleSubmitQuestionForQuiz = () => {
+
     };
 
     return (
@@ -90,13 +137,15 @@ function Questions(props) {
                             <div key={question.id} className="question-main mb-4">
                                 <div className="questions-content">
                                     <div className="form-floating description">
-                                        <input type="text" className="form-control" placeholder="Quiz description..." value={question.description} />
+                                        <input type="text" className="form-control" placeholder="Quiz description..." value={question.description} onChange={(event) => handleOnChange(question.id, '', 'QUESTION', event.target.value)} />
                                         <label>Question {index + 1}</label>
                                     </div>
                                     <div className="group-upload">
-                                        <label className="label-up"><RiImageAddFill /></label>
-                                        <input type={'file'} hidden />
-                                        <span>0 file is uploaded</span>
+                                        <label className="label-up" htmlFor={`${question.id}`}><RiImageAddFill /></label>
+                                        <input type={'file'} id={`${question.id}`} hidden onChange={(event) => handleOnChangeFileQuestion(question.id, event)} />
+                                        <span>
+                                            {question.imageName ? question.imageName : '0 file is uploaded'}
+                                        </span>
                                     </div>
                                     <div className="btn-add-question">
                                         <span onClick={() => handleAddRemoveQuestion('', 'ADD')}>
@@ -114,10 +163,9 @@ function Questions(props) {
                                         return (
                                             <div key={answer.id}
                                                 className="answers-content">
-                                                <input className="form-check-input isCorrect" type="checkbox" />
+                                                <input className="form-check-input isCorrect" checked={answer.isCorrect} onChange={(event) => handleAnswerQuestion('CHECKBOX', question.id, answer.id, event.target.checked)} type="checkbox" />
                                                 <div className="form-floating answer-name">
-                                                    <input type="text" className="form-control" placeholder={`${answer.description} `}
-                                                        value={answer.description} />
+                                                    <input type="text" className="form-control" placeholder={`${answer.description} `} value={answer.description} onChange={(event) => handleAnswerQuestion('INPUT', question.id, answer.id, event.target.value)} />
                                                     <label>Answer {index + 1}</label>
                                                 </div>
                                                 <div className="btn-add-answer">
@@ -137,6 +185,11 @@ function Questions(props) {
                             </div>
                         );
                     })
+                }
+                {questions && questions.length > 0 &&
+                    <div>
+                        <button onClick={() => handleSubmitQuestionForQuiz()} className="btn btn-warning">Save questions</button>
+                    </div>
                 }
             </div>
         </div>
