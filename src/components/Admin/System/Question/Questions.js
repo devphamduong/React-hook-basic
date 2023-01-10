@@ -5,6 +5,7 @@ import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { RiImageAddFill } from 'react-icons/ri';
 import { v4 as uuidv4 } from 'uuid';
 import './Questions.scss';
+import Lightbox from "react-awesome-lightbox";
 import _ from "lodash";
 
 function Questions(props) {
@@ -30,6 +31,11 @@ function Questions(props) {
             }
         ]
     );
+    const [isPreviewImg, setIsPreviewImg] = useState(false);
+    const [dataImgPreview, setDataImgPreview] = useState({
+        title: '',
+        url: ''
+    });
 
     const handleOnChange = (questionId, answerId, type, value) => {
         if (type === 'QUESTION') {
@@ -117,6 +123,18 @@ function Questions(props) {
         }
     };
 
+    const handlePreviewImg = (questionId) => {
+        let copiedQuestions = _.cloneDeep(questions);
+        let index = copiedQuestions.findIndex(item => item.id === questionId);
+        if (index > -1) {
+            setDataImgPreview({
+                title: copiedQuestions[index].imageName,
+                url: URL.createObjectURL(copiedQuestions[index].imageFile)
+            });
+            setIsPreviewImg(true);
+        }
+    };
+
     const handleSubmitQuestionForQuiz = () => {
 
     };
@@ -144,7 +162,7 @@ function Questions(props) {
                                         <label className="label-up" htmlFor={`${question.id}`}><RiImageAddFill /></label>
                                         <input type={'file'} id={`${question.id}`} hidden onChange={(event) => handleOnChangeFileQuestion(question.id, event)} />
                                         <span>
-                                            {question.imageName ? question.imageName : '0 file is uploaded'}
+                                            {question.imageName ? <span onClick={() => handlePreviewImg(question.id)}>{question.imageName}</span> : '0 file is uploaded'}
                                         </span>
                                     </div>
                                     <div className="btn-add-question">
@@ -190,6 +208,9 @@ function Questions(props) {
                     <div>
                         <button onClick={() => handleSubmitQuestionForQuiz()} className="btn btn-warning">Save questions</button>
                     </div>
+                }
+                {isPreviewImg &&
+                    <Lightbox image={dataImgPreview.url} title={dataImgPreview.title} onClose={() => setIsPreviewImg(false)}></Lightbox>
                 }
             </div>
         </div>
