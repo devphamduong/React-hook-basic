@@ -5,7 +5,7 @@ import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { RiImageAddFill } from 'react-icons/ri';
 import { v4 as uuidv4 } from 'uuid';
 import './QuizQA.scss';
-import { getAllQuizAdmin, createNewQuestionForQuiz, createNewAnswerForQuestion } from "../../../../services/apiServices";
+import { getAllQuizAdmin, createNewQuestionForQuiz, createNewAnswerForQuestion, getQuizWithQA } from "../../../../services/apiServices";
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 import _ from "lodash";
@@ -40,6 +40,12 @@ function QuizQA(props) {
         getAllQuiz();
     }, []);
 
+    useEffect(() => {
+        if (selectedQuiz && selectedQuiz.value) {
+            fetchQuizWithQA();
+        }
+    }, [selectedQuiz]);
+
     const getAllQuiz = async () => {
         let res = await getAllQuizAdmin();
         if (res && res.EC === 0) {
@@ -50,6 +56,30 @@ function QuizQA(props) {
                 };
             });
             setListQuiz(newQuiz);
+        }
+    };
+
+    function urltoFile(url, filename, mimeType) {
+        return (fetch(url)
+            .then(function (res) { return res.arrayBuffer(); })
+            .then(function (buf) { return new File([buf], filename, { type: mimeType }); })
+        );
+    }
+
+    const fetchQuizWithQA = async () => {
+        let res = await getQuizWithQA(selectedQuiz.value);
+        if (res && res.EC === 0) {
+            //convert base64 to file obj
+            let newQA = [];
+            for (let i = 0; i < res.DT.qa.length; i++) {
+                let question = res.DT.qa[i];
+                if (question.imageFile) {
+                    question.imageName = `Question-${question.id}.png`;
+                    question.imageFile = await urltoFile(`data:image/png;base64,${question.imageFile}`, `Question-${question.id}.png`, 'image/png');
+                }
+                newQA.push(question);
+            }
+            setQuestions(newQA);
         }
     };
 
