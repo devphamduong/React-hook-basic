@@ -94,8 +94,12 @@ const getQuizWithQA = (quizId) => {
     return axios.get(`api/v1/quiz-with-qa/${quizId}`);
 };
 
+const upSertQA = (data) => {
+    return axios.post('api/v1/quiz-upsert-qa', { ...data });
+};
+
 const assignQuizToUser = (quizId, userId) => {
     return axios.post('api/v1/quiz-assign-to-user', { quizId, userId });
 };
 
-export { createUser, getAllUsers, updateUser, deleteUser, getUserPaginate, login, register, getQuizByUser, getDataQuiz, submitQuiz, createQuiz, getAllQuizAdmin, updateQuiz, deleteQuiz, createNewQuestionForQuiz, createNewAnswerForQuestion, assignQuizToUser, getQuizWithQA };
+export { createUser, getAllUsers, updateUser, deleteUser, getUserPaginate, login, register, getQuizByUser, getDataQuiz, submitQuiz, createQuiz, getAllQuizAdmin, updateQuiz, deleteQuiz, createNewQuestionForQuiz, createNewAnswerForQuestion, assignQuizToUser, getQuizWithQA, upSertQA };

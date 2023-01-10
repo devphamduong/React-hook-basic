@@ -5,7 +5,7 @@ import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { RiImageAddFill } from 'react-icons/ri';
 import { v4 as uuidv4 } from 'uuid';
 import './QuizQA.scss';
-import { getAllQuizAdmin, createNewQuestionForQuiz, createNewAnswerForQuestion, getQuizWithQA } from "../../../../services/apiServices";
+import { getAllQuizAdmin, getQuizWithQA, upSertQA } from "../../../../services/apiServices";
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 import _ from "lodash";
@@ -181,6 +181,15 @@ function QuizQA(props) {
         }
     };
 
+    const toBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    };
+
     const handleSubmitQuestionForQuiz = async () => {
         if (_.isEmpty(selectedQuiz)) {
             toast.error('Please choose a Quiz!');
@@ -218,16 +227,20 @@ function QuizQA(props) {
             toast.error(`Not allowed empty Answer ${indexAnswer + 1} at Question ${indexQuestion1 + 1}`);
             return;
         }
-        for (const question of questions) {
-            //submit questions
-            const ques = await createNewQuestionForQuiz(+selectedQuiz.value, question.description, question.imageFile);
-            for (const answer of question.answers) {
-                //submit answers
-                await createNewAnswerForQuestion(answer.description, answer.isCorrect, ques.DT.id);
+        let copiedQuestions = _.cloneDeep(questions);
+        for (let i = 0; i < copiedQuestions.length; i++) {
+            if (copiedQuestions[i].imageFile) {
+                copiedQuestions[i].imageFile = await toBase64(copiedQuestions[i].imageFile);
             }
         }
-        toast.success('Create questions and answers successfully!');
-        setQuestions(initQuestions);
+        let res = await upSertQA({
+            quizId: selectedQuiz.value,
+            questions: copiedQuestions
+        });
+        if (res && res.EC === 0) {
+            toast.success(res.EM);
+            fetchQuizWithQA();
+        }
     };
 
     return (
