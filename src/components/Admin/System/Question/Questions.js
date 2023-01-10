@@ -1,19 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import { BsFillPatchPlusFill, BsFillPatchMinusFill } from 'react-icons/bs';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { RiImageAddFill } from 'react-icons/ri';
 import { v4 as uuidv4 } from 'uuid';
 import './Questions.scss';
+import { getAllQuizAdmin, createNewQuestionForQuiz, createNewAnswerForQuestion } from "../../../../services/apiServices";
 import Lightbox from "react-awesome-lightbox";
 import _ from "lodash";
 
 function Questions(props) {
 
-    const options = [
-        { value: 'd', label: 'd' }
-    ];
-    const [selectedQuiz, setSelectedQuiz] = useState({});
     const [questions, setQuestions] = useState(
         [
             {
@@ -36,6 +33,25 @@ function Questions(props) {
         title: '',
         url: ''
     });
+    const [listQuiz, setListQuiz] = useState([]);
+    const [selectedQuiz, setSelectedQuiz] = useState({});
+
+    useEffect(() => {
+        getAllQuiz();
+    }, []);
+
+    const getAllQuiz = async () => {
+        let res = await getAllQuizAdmin();
+        if (res && res.EC === 0) {
+            let newQuiz = res.DT.map(item => {
+                return {
+                    value: item.id,
+                    label: `${item.id} - ${item.description}`
+                };
+            });
+            setListQuiz(newQuiz);
+        }
+    };
 
     const handleOnChange = (questionId, answerId, type, value) => {
         if (type === 'QUESTION') {
@@ -135,8 +151,15 @@ function Questions(props) {
         }
     };
 
-    const handleSubmitQuestionForQuiz = () => {
-
+    const handleSubmitQuestionForQuiz = async () => {
+        //submit questions
+        await Promise.all(questions.map(async (question) => {
+            const ques = await createNewQuestionForQuiz(+selectedQuiz.value, question.description, question.imageFile);
+            //submit answers
+            await Promise.all(question.answers.map(async (answer) => {
+                await createNewAnswerForQuestion(answer.description, answer.isCorrect, ques.DT.id);
+            }));
+        }));
     };
 
     return (
@@ -146,7 +169,7 @@ function Questions(props) {
             <div className="add-new-question">
                 <div className="col-6 form-group">
                     <label className="mb-2">Select Quiz</label>
-                    <Select value={selectedQuiz} onChange={setSelectedQuiz} options={options} placeholder='' />
+                    <Select value={selectedQuiz} onChange={setSelectedQuiz} options={listQuiz} placeholder='' />
                 </div>
                 <div className="mt-3 mb-2">Add questions:</div>
                 {questions && questions.length > 0 &&
