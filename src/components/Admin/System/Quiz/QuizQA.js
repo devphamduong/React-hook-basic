@@ -4,13 +4,13 @@ import { BsFillPatchPlusFill, BsFillPatchMinusFill } from 'react-icons/bs';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { RiImageAddFill } from 'react-icons/ri';
 import { v4 as uuidv4 } from 'uuid';
-import './Questions.scss';
+import './QuizQA.scss';
 import { getAllQuizAdmin, createNewQuestionForQuiz, createNewAnswerForQuestion } from "../../../../services/apiServices";
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
 import _ from "lodash";
 
-function Questions(props) {
+function QuizQA(props) {
 
     const initQuestions = [
         {
@@ -202,8 +202,6 @@ function Questions(props) {
 
     return (
         <div className="questions-container">
-            <div className="title">Manage Questions</div>
-            <hr></hr>
             <div className="add-new-question">
                 <div className="col-6 form-group">
                     <label className="mb-2">Select Quiz</label>
@@ -278,4 +276,4 @@ function Questions(props) {
     );
 }
 
-export default Questions;
+export default QuizQA;
