@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function CountDown(props) {
 
     const { onTimesUp } = props;
-    const [count, setCount] = useState(5);
+    const [count, setCount] = useState(100000);
 
     useEffect(() => {
         if (count === 0) {

@@ -89,6 +89,14 @@
                 border-radius  : 50%;
                 cursor         : pointer;
 
+                &.answered {
+                    background-color: #c6c6c6;
+                }
+
+                &.clicked {
+                    color: red;
+                }
+
                 &:hover {
                     color: red;
                 }

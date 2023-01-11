@@ -140,7 +140,7 @@ function DetailQuiz(props) {
                 </div>
             </div>
             <div className='right'>
-                <RightContent dataQuiz={dataQuiz} handleFinishQuiz={handleFinishQuiz} />
+                <RightContent dataQuiz={dataQuiz} handleFinishQuiz={handleFinishQuiz} setCurrentQuestion={setCurrentQuestion} />
             </div>
             <ModalResult show={isShowModalResult} setShow={setIsShowModalResult} dataModalResult={dataModalResult} />
         </div>
