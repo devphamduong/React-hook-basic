@@ -1,24 +1,29 @@
+import CountDown from './CountDown';
 import './RightContent.scss';
 
 function RightContent(props) {
 
-    const { dataQuiz } = props;
+    const { dataQuiz, handleFinishQuiz } = props;
+
+    const onTimesUp = () => {
+        handleFinishQuiz();
+    };
 
     return (
-        <p>
+        <>
             <div className="main-timer">
-
+                <CountDown onTimesUp={onTimesUp} />
             </div>
             <div className='main-question'>
                 {dataQuiz && dataQuiz.length > 0 &&
                     dataQuiz.map((item, index) => {
                         return (
-                            <div className='question'>{index + 1}</div>
+                            <div key={`question-${index + 1}`} className='question'>{index + 1}</div>
                         );
                     })
                 }
             </div>
-        </p>
+        </>
     );
 }
 
