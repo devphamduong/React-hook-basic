@@ -2,6 +2,7 @@ import _, { set } from 'lodash';
 import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDataQuiz, submitQuiz } from '../../services/apiServices';
+import RightContent from './Content/RightContent';
 import './DetailQuiz.scss';
 import ModalResult from './ModalResult';
 import Question from './Question';
@@ -139,7 +140,7 @@ function DetailQuiz(props) {
                 </div>
             </div>
             <div className='right'>
-                count down
+                <RightContent dataQuiz={dataQuiz} />
             </div>
             <ModalResult show={isShowModalResult} setShow={setIsShowModalResult} dataModalResult={dataModalResult} />
         </div>
