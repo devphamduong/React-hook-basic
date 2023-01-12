@@ -102,4 +102,8 @@ const assignQuizToUser = (quizId, userId) => {
     return axios.post('api/v1/quiz-assign-to-user', { quizId, userId });
 };
 
-export { createUser, getAllUsers, updateUser, deleteUser, getUserPaginate, login, register, getQuizByUser, getDataQuiz, submitQuiz, createQuiz, getAllQuizAdmin, updateQuiz, deleteQuiz, createNewQuestionForQuiz, createNewAnswerForQuestion, assignQuizToUser, getQuizWithQA, upSertQA };
+const logOut = (email, refresh_token) => {
+    return axios.post('api/v1/logout', { email, refresh_token });
+};
+
+export { createUser, getAllUsers, updateUser, deleteUser, getUserPaginate, login, register, getQuizByUser, getDataQuiz, submitQuiz, createQuiz, getAllQuizAdmin, updateQuiz, deleteQuiz, createNewQuestionForQuiz, createNewAnswerForQuestion, assignQuizToUser, getQuizWithQA, upSertQA, logOut };

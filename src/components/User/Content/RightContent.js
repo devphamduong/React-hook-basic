@@ -13,8 +13,8 @@ function RightContent(props) {
 
     const getClassQuestion = (question) => {
         if (question && question.answers.length > 0) {
-            let isUnAnswered = question.answers.find(answer => answer.isSelected === true);
-            if (isUnAnswered) {
+            let isAnswered = question.answers.find(answer => answer.isSelected === true);
+            if (isAnswered) {
                 return "question answered";
             }
         }
@@ -30,8 +30,8 @@ function RightContent(props) {
                 }
             });
             if (question && question.answers.length > 0) {
-                let isUnAnswered = question.answers.find(answer => answer.isSelected === true);
-                if (isUnAnswered) {
+                let isAnswered = question.answers.find(answer => answer.isSelected === true);
+                if (isAnswered) {
                     return;
                 }
             }

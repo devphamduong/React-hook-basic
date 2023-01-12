@@ -38,6 +38,12 @@ function Login(props) {
         }
     };
 
+    const handleOnKeyDown = (event) => {
+        if (event && event.key === 'Enter') {
+            handleLogin();
+        }
+    };
+
     const validateEmail = (email) => {
         return String(email).toLowerCase().match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
     };
@@ -65,7 +71,7 @@ function Login(props) {
                 </div>
                 <div className='form-group'>
                     <label>Password</label>
-                    <input value={password} onChange={(event) => setPassword(event.target.value)} type={'password'} className="form-control" />
+                    <input value={password} onChange={(event) => setPassword(event.target.value)} onKeyDown={(event) => handleOnKeyDown()} type={'password'} className="form-control" />
                 </div>
                 <span className='forgot-password'>Forgot password?</span>
                 <div>
