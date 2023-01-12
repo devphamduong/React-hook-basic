@@ -9,6 +9,7 @@ import { logOut } from '../../services/apiServices';
 import { doLogout } from '../../redux/action/userAction';
 import './Header.scss';
 import { toast } from 'react-toastify';
+import Language from './Language';
 
 function Header() {
 
@@ -56,6 +57,7 @@ function Header() {
                                 <NavDropdown.Item onClick={() => handleLogOut()}>Log out</NavDropdown.Item>
                             </NavDropdown>
                         }
+                        <Language />
                     </Nav>
                 </Navbar.Collapse>
             </Container>

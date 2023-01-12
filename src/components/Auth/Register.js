@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { register } from '../../services/apiServices';
+import Language from '../Header/Language';
 import './Register.scss';
 
 function Register() {
@@ -40,6 +41,7 @@ function Register() {
             <div className='header'>
                 <span>Already have an account?</span>
                 <button onClick={() => { navigate('/login'); }}>Log in</button>
+                <Language />
             </div>
             <div className='title col-4 mx-auto'>
                 Pham Chu Duong

@@ -6,6 +6,7 @@ import { login } from '../../services/apiServices';
 import { doLogin } from '../../redux/action/userAction';
 import { ImSpinner10 } from 'react-icons/im';
 import './Login.scss';
+import Language from '../Header/Language';
 
 function Login(props) {
 
@@ -57,6 +58,7 @@ function Login(props) {
             <div className='header'>
                 <span>Don't have an account yet?</span>
                 <button onClick={() => handleClickBtnRegister()}>Sign up</button>
+                <Language />
             </div>
             <div className='title col-4 mx-auto'>
                 Pham Chu Duong
