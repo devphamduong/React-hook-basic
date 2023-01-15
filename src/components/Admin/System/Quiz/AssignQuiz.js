@@ -2,9 +2,11 @@ import Select from 'react-select';
 import { useState, useEffect } from 'react';
 import { getAllQuizAdmin, getAllUsers, assignQuizToUser } from "../../../../services/apiServices";
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 
 function AssignQuiz() {
 
+    const { t } = useTranslation();
     const [listQuiz, setListQuiz] = useState([]);
     const [selectedQuiz, setSelectedQuiz] = useState({});
     const [listUser, setListUser] = useState([]);
@@ -53,15 +55,15 @@ function AssignQuiz() {
     return (
         <div className="assign-quiz-container row">
             <div className="col-6 form-group">
-                <label className="mb-2">Select Quiz</label>
+                <label className="mb-2">{t('admin.feature.manage-quiz.assign.title-select')}</label>
                 <Select value={selectedQuiz} onChange={setSelectedQuiz} options={listQuiz} placeholder='' />
             </div>
             <div className="col-6 form-group">
-                <label className="mb-2">Select User</label>
+                <label className="mb-2">{t('admin.feature.manage-quiz.assign.title-user')}</label>
                 <Select value={selectedUser} onChange={setSelectedUser} options={listUser} placeholder='' />
             </div>
             <div>
-                <button onClick={() => handleAssignQuizToUser()} className='btn btn-warning mt-3'>Assign</button>
+                <button onClick={() => handleAssignQuizToUser()} className='btn btn-warning mt-3'>{t('admin.feature.manage-quiz.assign.btn-assign')}</button>
             </div>
         </div>
     );

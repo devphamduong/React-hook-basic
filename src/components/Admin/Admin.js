@@ -2,6 +2,7 @@ import SideBar from "./SideBar";
 import { FaBars } from "react-icons/fa";
 import './Admin.scss';
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Outlet } from 'react-router-dom';
 import PerfectScrollbar from 'react-perfect-scrollbar';
@@ -9,6 +10,7 @@ import Language from "../Header/Language";
 
 function Admin() {
 
+    const { t } = useTranslation();
     const [collapsed, setCollapsed] = useState(false);
 
     return (
@@ -23,9 +25,9 @@ function Admin() {
                     </span>
                     <div className="rightside">
                         <Language />
-                        <NavDropdown title="Settings" id="basic-nav-dropdown">
-                            <NavDropdown.Item>Profile</NavDropdown.Item>
-                            <NavDropdown.Item>Log out</NavDropdown.Item>
+                        <NavDropdown title={t('admin.header.settings')} id="basic-nav-dropdown">
+                            <NavDropdown.Item>{t('admin.header.profile')}</NavDropdown.Item>
+                            <NavDropdown.Item>{t('admin.header.logout')}</NavDropdown.Item>
                         </NavDropdown>
                     </div>
                 </div>

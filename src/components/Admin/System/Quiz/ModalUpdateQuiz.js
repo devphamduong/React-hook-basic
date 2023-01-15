@@ -5,11 +5,12 @@ import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from "react-toastify";
 import Select from 'react-select';
+import { useTranslation } from 'react-i18next';
 import { updateQuiz } from '../../../../services/apiServices';
 
 function ModalUpdateQuiz(props) {
 
-
+    const { t } = useTranslation();
     const options = [
         { value: 'EASY', label: 'EASY' },
         { value: 'MEDIUM', label: 'MEDIUM' },
@@ -67,41 +68,41 @@ function ModalUpdateQuiz(props) {
         <>
             <Modal className="modal-add-user" show={show} onHide={handleClose} size='xl' backdrop='static'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update user</Modal.Title>
+                    <Modal.Title>{t('admin.feature.manage-quiz.manage.modal-update.title')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
                         <div className="col-md-6">
-                            <label className="form-label">Name</label>
+                            <label className="form-label">{t('admin.feature.manage-quiz.manage.name')}</label>
                             <input type="text" className="form-control" value={name} onChange={(event) => setName(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Description</label>
+                            <label className="form-label">{t('admin.feature.manage-quiz.manage.description')}</label>
                             <input type="text" className="form-control" value={description} onChange={(event) => setDescription(event.target.value)} />
                         </div>
                         <div className="col-md-4">
                             <Select value={difficulty} options={options}
-                                onChange={setDifficulty} placeholder='Quiz difficulty...' />
+                                onChange={setDifficulty} placeholder={t('admin.feature.manage-quiz.manage.difficulty')} />
                         </div>
                         <div className="col-md-12">
-                            <label className="form-label label-upload" htmlFor="labelUpload"><FcPlus /><span>Upload File Image</span></label>
+                            <label className="form-label label-upload" htmlFor="labelUpload"><FcPlus /><span>{t('admin.feature.manage-quiz.manage.upload')}</span></label>
                             <input type="file" hidden id="labelUpload" onChange={(event) => handleUploadImage(event)} />
                         </div>
                         <div className="col-md-12 img-preview">
                             {previewImg ?
                                 <img src={previewImg} alt="previewImage" />
                                 :
-                                <span>Preview Image</span>
+                                <span>{t('admin.feature.manage-quiz.manage.modal-update.preview-img')}</span>
                             }
                         </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        {t('admin.feature.manage-quiz.manage.modal-update.btn-close')}
                     </Button>
                     <Button variant="primary" onClick={() => handleUpdateQuiz()}>
-                        Save changes
+                        {t('admin.feature.manage-quiz.manage.modal-update.btn-save')}
                     </Button>
                 </Modal.Footer>
             </Modal>

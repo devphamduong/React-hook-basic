@@ -3,6 +3,7 @@ import ModalCreateUser from './ModalCreateUser';
 import { FcPlus } from 'react-icons/fc';
 import './ManageUser.scss';
 import TableUser from './TableUser';
+import { useTranslation } from 'react-i18next';
 import { getAllUsers, getUserPaginate } from "../../../../services/apiServices";
 import ModalUpdateUser from './ModalUpdateUser';
 import ModalViewUser from './ModalViewUser';
@@ -11,6 +12,7 @@ import TableUserPaginate from './TableUserPaginate';
 
 function ManageUser(props) {
 
+    const { t } = useTranslation();
     const LIMIT_USER = 6;
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
@@ -63,10 +65,10 @@ function ManageUser(props) {
     return (
         <>
             <div className="manage-user-container">
-                <div className="title">Manage User</div>
+                <div className="title">{t('admin.feature.manage-user.title')}</div>
                 <div className="manage-user-content">
                     <div>
-                        <button className='btn-add-new btn btn-primary' onClick={() => setShowModalCreate(true)}><FcPlus /><span>Add new user</span></button>
+                        <button className='btn-add-new btn btn-primary' onClick={() => setShowModalCreate(true)}><FcPlus /><span>{t('admin.feature.manage-user.btn-add')}</span></button>
                     </div>
                     <div className='table-user'>
                         {/* <TableUser listUsers={listUsers} handleClickBtnUpdate={handleClickBtnUpdate} handleClickBtnView={handleClickBtnView} handleClickBtnDelete={handleClickBtnDelete} /> */}

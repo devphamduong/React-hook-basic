@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { getOverview } from '../../../services/apiServices';
+import { useTranslation } from 'react-i18next';
 import './DashBoard.scss';
 
 function DashBoard(props) {
 
     const [dataOverview, setDataOverview] = useState([]);
     const [dataChart, setDataChart] = useState([]);
+    const { t } = useTranslation();
 
     useEffect(() => {
         getDataOverview();
@@ -23,17 +25,17 @@ function DashBoard(props) {
             As = res?.DT?.others?.countAnswers ?? 0;
             const data = [
                 {
-                    "name": "Quizzes",
+                    "name": t('admin.dash-board.quiz'),
                     "Qz": Qz,
                     "Qzs": ''
                 },
                 {
-                    "name": "Questions",
+                    "name": t('admin.dash-board.question'),
                     "Qs": Qs,
                     "Qss": ''
                 },
                 {
-                    "name": "Answers",
+                    "name": t('admin.dash-board.answer'),
                     "As": As,
                     "Ass": ''
                 }
@@ -44,32 +46,32 @@ function DashBoard(props) {
 
     return (
         <div className="dashboard-container">
-            <div className='title'>Analytics DashBoard</div>
+            <div className='title'>{t('admin.dash-board.analytics')}</div>
             <div className='content'>
                 <div className='left'>
                     <div className='child'>
-                        <span className='text-1'>Total Users</span>
+                        <span className='text-1'>{t('admin.dash-board.total-user')}</span>
                         <span className='text-2'>
                             {dataOverview && dataOverview.users && dataOverview.users.total ?
                                 <>{dataOverview.users.total}</> : <>0</>}
                         </span>
                     </div>
                     <div className='child'>
-                        <span className='text-1'>Total Quizzes</span>
+                        <span className='text-1'>{t('admin.dash-board.total-quiz')}</span>
                         <span className='text-2'>
                             {dataOverview && dataOverview.others && dataOverview.others.countQuiz ?
                                 <>{dataOverview.others.countQuiz}</> : <>0</>}
                         </span>
                     </div>
                     <div className='child'>
-                        <span className='text-1'>Total Questions</span>
+                        <span className='text-1'>{t('admin.dash-board.total-question')}</span>
                         <span className='text-2'>
                             {dataOverview && dataOverview.others && dataOverview.others.countQuestions ?
                                 <>{dataOverview.others.countQuestions}</> : <>0</>}
                         </span>
                     </div>
                     <div className='child'>
-                        <span className='text-1'>Total Answers</span>
+                        <span className='text-1'>{t('admin.dash-board.total-answer')}</span>
                         <span className='text-2'>
                             {dataOverview && dataOverview.others && dataOverview.others.countAnswers ?
                                 <>{dataOverview.others.countAnswers}</> : <>0</>}

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDataQuiz, submitQuiz } from '../../services/apiServices';
 import RightContent from './Content/RightContent';
+import { useTranslation } from 'react-i18next';
 import './DetailQuiz.scss';
 import ModalResult from './ModalResult';
 import Question from './Question';
@@ -10,6 +11,7 @@ import Question from './Question';
 function DetailQuiz(props) {
 
     const params = useParams();
+    const { t } = useTranslation();
     const formatedId = (id) => {
         return id.replace(/[^a-zA-Z0-9]/g, '');
     };
@@ -135,9 +137,9 @@ function DetailQuiz(props) {
                     <Question dataQuiz={dataQuiz && dataQuiz.length > 0 ? dataQuiz[currentQuestion] : []} currentQuestion={currentQuestion} handleCheckAns={handleCheckAns} />
                 </div>
                 <div className='question-footer'>
-                    <button className='btn btn-secondary' disabled={btnPrevDisabled} onClick={() => handlePrev()}>Prev</button>
-                    <button className='btn btn-primary' disabled={btnNextDisabled} onClick={() => handleNext()}>Next</button>
-                    <button className='btn btn-warning' disabled={btnNextDisabled} onClick={() => handleFinishQuiz()}>Finish</button>
+                    <button className='btn btn-secondary' disabled={btnPrevDisabled} onClick={() => handlePrev()}>{t('user.detail-quiz.prev')}</button>
+                    <button className='btn btn-primary' disabled={btnNextDisabled} onClick={() => handleNext()}>{t('user.detail-quiz.next')}</button>
+                    <button className='btn btn-warning' disabled={btnNextDisabled} onClick={() => handleFinishQuiz()}>{t('user.detail-quiz.finish')}</button>
                 </div>
             </div>
             <div className='right'>

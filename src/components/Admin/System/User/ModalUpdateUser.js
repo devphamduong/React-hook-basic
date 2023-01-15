@@ -4,11 +4,21 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 import { updateUser } from '../../../../services/apiServices';
 
 function ModalUpdateUser(props) {
 
     const { show, setShow, userUpdate, resetUpdateData, currentPage } = props;
+    const { t } = useTranslation();
+    const handleShow = () => setShow(true);
+    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [role, setRole] = useState('USER');
+    const [image, setImage] = useState('');
+    const [previewImg, setPreviewImg] = useState('');
+
     const handleClose = () => {
         setShow(false);
         setEmail('');
@@ -19,13 +29,6 @@ function ModalUpdateUser(props) {
         setImage('');
         resetUpdateData();
     };
-    const handleShow = () => setShow(true);
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [role, setRole] = useState('USER');
-    const [image, setImage] = useState('');
-    const [previewImg, setPreviewImg] = useState('');
 
     useEffect(() => {
         if (!_.isEmpty(userUpdate)) {
@@ -61,7 +64,7 @@ function ModalUpdateUser(props) {
         <>
             <Modal className="modal-add-user" show={show} onHide={handleClose} size='xl' backdrop='static'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Update user</Modal.Title>
+                    <Modal.Title>{t('admin.feature.manage-user.modal-update.title')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
@@ -70,39 +73,39 @@ function ModalUpdateUser(props) {
                             <input type="email" disabled className="form-control" value={email} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Username</label>
+                            <label className="form-label">{t('admin.feature.manage-user.modal-update.username')}</label>
                             <input type="text" className="form-control" value={username} onChange={(event) => setUsername(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Password</label>
+                            <label className="form-label">{t('admin.feature.manage-user.modal-update.title')}</label>
                             <input type="password" disabled className="form-control" value={password} />
                         </div>
                         <div className="col-md-4">
-                            <label className="form-label">Role</label>
+                            <label className="form-label">{t('admin.feature.manage-user.modal-update.role')}</label>
                             <select className="form-select" value={role} onChange={(event) => setRole(event.target.value)}>
                                 <option value={'USER'}>USER</option>
                                 <option value={'ADMIN'}>ADMIN</option>
                             </select>
                         </div>
                         <div className="col-md-12">
-                            <label className="form-label label-upload" htmlFor="labelUpload"><FcPlus /><span>Upload File Image</span></label>
+                            <label className="form-label label-upload" htmlFor="labelUpload"><FcPlus /><span>{t('admin.feature.manage-user.modal-update.btn-upload')}</span></label>
                             <input type="file" hidden id="labelUpload" onChange={(event) => handleUploadImage(event)} />
                         </div>
                         <div className="col-md-12 img-preview">
                             {previewImg ?
                                 <img src={previewImg} alt="previewImage" />
                                 :
-                                <span>Preview Image</span>
+                                <span>{t('admin.feature.manage-user.modal-update.preview-img')}</span>
                             }
                         </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        {t('admin.feature.manage-user.modal-update.btn-close')}
                     </Button>
                     <Button variant="primary" onClick={() => handleUpdateUser()}>
-                        Save changes
+                        {t('admin.feature.manage-user.modal-update.btn-save')}
                     </Button>
                 </Modal.Footer>
             </Modal>

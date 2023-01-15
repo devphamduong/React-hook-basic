@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { logOut } from '../../services/apiServices';
 import { doLogout } from '../../redux/action/userAction';
 import './Header.scss';
@@ -15,6 +16,7 @@ function Header() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const handleLogin = () => {
         navigate('/login');
@@ -41,20 +43,20 @@ function Header() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
-                        <NavLink to="/" className='nav-link'>Home</NavLink>
-                        <NavLink to="/user" className='nav-link'>User</NavLink>
-                        <NavLink to="/admin" className='nav-link'>Admin</NavLink>
+                        <NavLink to="/" className='nav-link'>{t('header.home')}</NavLink>
+                        <NavLink to="/user" className='nav-link'>{t('header.user')}</NavLink>
+                        <NavLink to="/admin" className='nav-link'>{t('header.admin')}</NavLink>
                     </Nav>
                     <Nav>
                         {!isAuthenticated ?
                             <>
-                                <button className='btn-login' onClick={() => handleLogin()}>Log in</button>
-                                <button className='btn-signup' onClick={() => { navigate('/register'); }}>Sign up</button>
+                                <button className='btn-login' onClick={() => handleLogin()}>{t('header.login')}</button>
+                                <button className='btn-signup' onClick={() => { navigate('/register'); }}>{t('header.register')}</button>
                             </>
                             :
-                            <NavDropdown title="Settings" id="basic-nav-dropdown">
-                                <NavDropdown.Item>Profile</NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => handleLogOut()}>Log out</NavDropdown.Item>
+                            <NavDropdown title={t('header.settings')} id="basic-nav-dropdown">
+                                <NavDropdown.Item>{t('header.profile')}</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => handleLogOut()}>{t('header.logout')}</NavDropdown.Item>
                             </NavDropdown>
                         }
                         <Language />

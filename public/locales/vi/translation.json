@@ -1,4 +1,14 @@
 {
+    "header": {
+        "home": "Trang chủ",
+        "user": "Người dùng",
+        "admin": "Quản lý",
+        "settings": "Cài đặt",
+        "profile": "Hồ sơ",
+        "login": "Đăng nhập",
+        "register": "Đăng ký",
+        "logout": "Đăng xuất"
+    },
     "homepage": {
         "title1": "Có một cách tốt hơn để hỏi",
         "title2": "Bạn không muốn làm một hình thức nhàm chán. Và khán giả của bạn sẽ không trả lời một. Thay vào đó, hãy tạo một kiểu chữ - và làm cho mọi người hài lòng.",
@@ -6,5 +16,140 @@
             "login": "Hãy bắt đầu. Hoàn toàn miễn phí",
             "quiz": "Làm bài Quiz ngay"
         }
+    },
+    "user": {
+        "list-quiz": {
+            "btn-start": "Bắt đầu ngay",
+            "message": "Bạn chưa có bài Quiz nào cả"
+        },
+        "detail-quiz": {
+            "question-no": "Câu ",
+            "prev": "Trước",
+            "next": "Tiếp",
+            "finish": "Nộp bài",
+            "modal-result": {
+                "title": "Kết quả của bạn...",
+                "total-question": "Số câu hỏi: ",
+                "total-correct-answer": "Số câu trả lời đúng: ",
+                "show-answer": "Xem đáp án",
+                "btn-close": "Đóng"
+            }
+        }
+    },
+    "admin": {
+        "header": {
+            "settings": "Cài đặt",
+            "profile": "Hồ sơ",
+            "logout": "Đăng xuất"
+        },
+        "dash-board": {
+            "title": "Tổng quan",
+            "analytics": "Số liệu thống kê",
+            "total-user": "Số người dùng",
+            "total-quiz": "Số bài Quiz",
+            "total-question": "Số câu hỏi",
+            "total-answer": "Số câu trả lời",
+            "quiz": "Quiz",
+            "question": "Câu hỏi",
+            "answer": "Câu trả lời"
+        },
+        "feature": {
+            "title": "Chức năng",
+            "manage-user": {
+                "title": "Quản lý người dùng",
+                "btn-add": "Thêm mới người dùng",
+                "username": "Tên người dùng",
+                "role": "Chức vụ",
+                "actions": "Hành động",
+                "message": "Không tìm thấy dữ liệu",
+                "btn-view": "Xem",
+                "btn-update": "Cập nhật",
+                "btn-delete": "Xóa",
+                "prev": "< Trước",
+                "next": "Tiếp >",
+                "modal-view": {
+                    "title": "Thông tin người dùng",
+                    "username": "Tên người dùng",
+                    "password": "Mật khẩu",
+                    "role": "Chức vụ",
+                    "preview-img": "Xem trước hình ảnh",
+                    "btn-close": "Đóng"
+                },
+                "modal-update": {
+                    "title": "Cập nhật thông tin người dùng",
+                    "username": "Tên người dùng",
+                    "password": "Mật khẩu",
+                    "role": "Chức vụ",
+                    "btn-upload": "Tải ảnh lên",
+                    "preview-img": "Hình ảnh xem trước",
+                    "btn-close": "Đóng",
+                    "btn-save": "Lưu thay đổi"
+                },
+                "modal-delete": {
+                    "title": "Xác nhận xóa người dùng",
+                    "question": "Bạn có chắc chắn xóa người dùng có email = ",
+                    "btn-cancel": "Hủy",
+                    "btn-delete": "Xóa người dùng"
+                }
+            },
+            "manage-quiz": {
+                "title": "Quản lý bài Quiz",
+                "title-update": "Cập nhật Câu hỏi/Đáp án của Quiz",
+                "title-assign": "Giao bài Quiz cho người dùng",
+                "manage": {
+                    "title": "Thêm bài Quiz",
+                    "name": "Tên",
+                    "description": "Mô tả",
+                    "difficulty": "Độ khó",
+                    "upload": "Tải ảnh lên",
+                    "btn-save": "Thêm mới",
+                    "title-list": "Danh sách bài Quiz",
+                    "message": "Không tìm thấy dữ liệu",
+                    "actions": "Hành động",
+                    "btn-update": "Cập nhật",
+                    "btn-delete": "Xóa",
+                    "modal-update": {
+                        "title": "Cập nhật thông tin bài Quiz",
+                        "preview-img": "Hình ảnh xem trước",
+                        "btn-close": "Đóng",
+                        "btn-save": "Lưu thay đổi"
+                    },
+                    "modal-delete": {
+                        "title": "Xác nhận xóa người dùng",
+                        "question": "Bạn có chắc chắn xóa bài Quiz này có ID = ",
+                        "btn-cancel": "Hủy",
+                        "btn-delete": "Xóa bài"
+                    }
+                },
+                "update": {
+                    "title-select": "Chọn bài Quiz",
+                    "add-question": "Thêm câu hỏi",
+                    "question": "Câu hỏi ",
+                    "answer": "Câu trả lời ",
+                    "title-img": "0 tập tin được tải lên",
+                    "btn-save": "Lưu thay đổi"
+                },
+                "assign": {
+                    "title-select": "Chọn bài Quiz",
+                    "title-user": "Chọn người dùng",
+                    "btn-assign": "Giao"
+                }
+            },
+            "manage-question": {
+                "title": "Quản lý câu hỏi"
+            }
+        }
+    },
+    "login-register": {
+        "has-account": "Đã có tài khoản rồi?",
+        "no-account": "Vẫn chưa có tài khoản?",
+        "btn-register": "Đăng ký",
+        "title-login": "Hello, bạn là ai?",
+        "title-register": "Bắt đầu hành trình của bạn",
+        "username": "Tên người dùng",
+        "password": "Mật khẩu",
+        "forgot": "Quên mật khẩu?",
+        "btn-login": "Đăng nhập",
+        "go-home": "Quay về trang chủ"
     }
 }

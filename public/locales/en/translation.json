@@ -1,4 +1,14 @@
 {
+    "header": {
+        "home": "Home",
+        "user": "User",
+        "admin": "Admin",
+        "settings": "Settings",
+        "profile": "Profile",
+        "login": "Login",
+        "register": "Sign up",
+        "logout": "Log out"
+    },
     "homepage": {
         "title1": "There's a better way to ask",
         "title2": "You don't want to make a boring form. And your audience won't answer one. Create a typeform instead - and make everyone happy.",
@@ -6,5 +16,140 @@
             "login": "Get's started. It's free",
             "quiz": "Do Quiz Now"
         }
+    },
+    "user": {
+        "list-quiz": {
+            "btn-start": "Start now",
+            "message": "You don't have any Quiz yet"
+        },
+        "detail-quiz": {
+            "question-no": "Question ",
+            "prev": "Prev",
+            "next": "Next",
+            "finish": "Finish",
+            "modal-result": {
+                "title": "Your result...",
+                "total-question": "Number of question(s): ",
+                "total-correct-answer": "Correct answer(s): ",
+                "show-answer": "Show answer",
+                "btn-close": "Close"
+            }
+        }
+    },
+    "admin": {
+        "header": {
+            "settings": "Settings",
+            "profile": "Profile",
+            "logout": "Log out"
+        },
+        "dash-board": {
+            "title": "Dashboard",
+            "analytics": "Statistics",
+            "total-user": "User",
+            "total-quiz": "Quiz",
+            "total-question": "Question",
+            "total-answer": "Answer",
+            "quiz": "Quiz",
+            "question": "Question",
+            "answer": "Answer"
+        },
+        "feature": {
+            "title": "Features",
+            "manage-user": {
+                "title": "Manage User",
+                "btn-add": "Add new User",
+                "username": "Username",
+                "role": "Role",
+                "actions": "Actions",
+                "message": "Not found data",
+                "btn-view": "Xem",
+                "btn-update": "Update",
+                "btn-delete": "Delete",
+                "prev": "< Prev",
+                "next": "Next >",
+                "modal-view": {
+                    "title": "User information",
+                    "username": "Username",
+                    "password": "Password",
+                    "role": "Role",
+                    "preview-img": "Preview image",
+                    "btn-close": "Close"
+                },
+                "modal-update": {
+                    "title": "Update User information",
+                    "username": "Username",
+                    "password": "Password",
+                    "role": "Role",
+                    "btn-upload": "Upload image",
+                    "preview-img": "Preview image",
+                    "btn-close": "Close",
+                    "btn-save": "Save changes"
+                },
+                "modal-delete": {
+                    "title": "Confirm delete User",
+                    "question": "Are you sure want to delete user with email = ",
+                    "btn-cancel": "Cancel",
+                    "btn-delete": "Delete User"
+                }
+            },
+            "manage-quiz": {
+                "title": "Manage Quiz",
+                "title-update": "Update Q/A Quiz",
+                "title-assign": "Assign Quiz to User",
+                "manage": {
+                    "title": "Add new Quiz",
+                    "name": "Name",
+                    "description": "description",
+                    "difficulty": "Difficulty",
+                    "upload": "Upload image",
+                    "btn-save": "Add new",
+                    "title-list": "List Quizzes",
+                    "message": "Not found data",
+                    "actions": "Actions",
+                    "btn-update": "Update",
+                    "btn-delete": "Delete",
+                    "modal-update": {
+                        "title": "Update Quiz",
+                        "preview-img": "Preview image",
+                        "btn-close": "Close",
+                        "btn-save": "Save changes"
+                    },
+                    "modal-delete": {
+                        "title": "Confirm delete Quiz",
+                        "question": "Are you sure want to delete this Quiz with ID = ",
+                        "btn-cancel": "Cancel",
+                        "btn-delete": "Delete Quiz"
+                    }
+                },
+                "update": {
+                    "title-select": "Select Quiz",
+                    "add-question": "Add question",
+                    "question": "Question ",
+                    "answer": "Answer ",
+                    "title-img": "0 files uploaded",
+                    "btn-save": "Save changes"
+                },
+                "assign": {
+                    "title-select": "Select Quiz",
+                    "title-user": "Select User",
+                    "btn-assign": "Assign"
+                }
+            },
+            "manage-question": {
+                "title": "Manage Question"
+            }
+        }
+    },
+    "login-register": {
+        "has-account": "Already has an account?",
+        "no-account": "Don't have an account?",
+        "btn-register": "Sign up",
+        "title-login": "Hello, who are you?",
+        "title-register": "Start your own journey",
+        "username": "Username",
+        "password": "Password",
+        "forgot": "Forgot password?",
+        "btn-login": "Log in",
+        "go-home": "Back to homepage"
     }
 }

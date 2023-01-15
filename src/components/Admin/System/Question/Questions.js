@@ -8,10 +8,12 @@ import './Questions.scss';
 import { getAllQuizAdmin, createNewQuestionForQuiz, createNewAnswerForQuestion } from "../../../../services/apiServices";
 import Lightbox from "react-awesome-lightbox";
 import { toast } from "react-toastify";
+import { useTranslation } from 'react-i18next';
 import _ from "lodash";
 
 function Questions(props) {
 
+    const { t } = useTranslation();
     const initQuestions = [
         {
             id: uuidv4(),
@@ -202,28 +204,28 @@ function Questions(props) {
 
     return (
         <div className="questions-container">
-            <div className="title">Manage Questions</div>
+            <div className="title">{t('admin.feature.manage-question.title')}</div>
             <hr></hr>
             <div className="add-new-question">
                 <div className="col-6 form-group">
-                    <label className="mb-2">Select Quiz</label>
+                    <label className="mb-2">{t('admin.feature.manage-quiz.update.title-select')}</label>
                     <Select value={selectedQuiz} onChange={setSelectedQuiz} options={listQuiz} placeholder='' />
                 </div>
-                <div className="mt-3 mb-2">Add questions:</div>
+                <div className="mt-3 mb-2">{t('admin.feature.manage-quiz.update.add-question')}</div>
                 {questions && questions.length > 0 &&
                     questions.map((question, index) => {
                         return (
                             <div key={question.id} className="question-main mb-4">
                                 <div className="questions-content">
                                     <div className="form-floating description">
-                                        <input type="text" className="form-control" placeholder="Quiz description..." value={question.description} onChange={(event) => handleOnChange(question.id, '', 'QUESTION', event.target.value)} />
-                                        <label>Question {index + 1}</label>
+                                        <input type="text" className="form-control" placeholder={t('admin.feature.manage-quiz.update.question')} value={question.description} onChange={(event) => handleOnChange(question.id, '', 'QUESTION', event.target.value)} />
+                                        <label>{t('admin.feature.manage-quiz.update.question')}{index + 1}</label>
                                     </div>
                                     <div className="group-upload">
                                         <label className="label-up" htmlFor={`${question.id}`}><RiImageAddFill /></label>
                                         <input type={'file'} id={`${question.id}`} hidden onChange={(event) => handleOnChangeFileQuestion(question.id, event)} />
                                         <span>
-                                            {question.imageName ? <span onClick={() => handlePreviewImg(question.id)}>{question.imageName}</span> : '0 file is uploaded'}
+                                            {question.imageName ? <span onClick={() => handlePreviewImg(question.id)}>{question.imageName}</span> : t('admin.feature.manage-quiz.update.title-img')}
                                         </span>
                                     </div>
                                     <div className="btn-add-question">
@@ -245,7 +247,7 @@ function Questions(props) {
                                                 <input className="form-check-input isCorrect" checked={answer.isCorrect} onChange={(event) => handleAnswerQuestion('CHECKBOX', question.id, answer.id, event.target.checked)} type="checkbox" />
                                                 <div className="form-floating answer-name">
                                                     <input type="text" className="form-control" placeholder={`${answer.description} `} value={answer.description} onChange={(event) => handleAnswerQuestion('INPUT', question.id, answer.id, event.target.value)} />
-                                                    <label>Answer {index + 1}</label>
+                                                    <label>{t('admin.feature.manage-quiz.update.answer')}{index + 1}</label>
                                                 </div>
                                                 <div className="btn-add-answer">
                                                     <span onClick={() => handleAddRemoveAnswer(question.id, '', 'ADD')}>
@@ -267,7 +269,7 @@ function Questions(props) {
                 }
                 {questions && questions.length > 0 &&
                     <div>
-                        <button onClick={() => handleSubmitQuestionForQuiz()} className="btn btn-warning">Save questions</button>
+                        <button onClick={() => handleSubmitQuestionForQuiz()} className="btn btn-warning">{t('admin.feature.manage-quiz.update.btn-save')}</button>
                     </div>
                 }
                 {isPreviewImg &&

@@ -1,10 +1,12 @@
 import _ from "lodash";
 import { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import Lightbox from "react-awesome-lightbox";
 
 function Question(props) {
 
     const { dataQuiz, currentQuestion, handleCheckAns } = props;
+    const { t } = useTranslation();
     const [isPreviewImg, setIsPreviewImg] = useState(false);
     if (_.isEmpty(dataQuiz)) {
         return (<></>);
@@ -25,11 +27,10 @@ function Question(props) {
                 </div>
                 :
                 <div className="question-image">
-
                 </div>
             }
             <div className='question'>
-                Question {currentQuestion + 1}:  {dataQuiz.questionDescription}?
+                {t('user.detail-quiz.question-no')}{currentQuestion + 1}:  {dataQuiz.questionDescription}?
             </div>
             <div className='answers'>
                 {dataQuiz.answers && dataQuiz.answers.length > 0 &&

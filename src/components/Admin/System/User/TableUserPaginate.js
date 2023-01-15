@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useTranslation } from 'react-i18next';
 
 function TableUserPaginate(props) {
 
     const { listUsers, pageCount, currentPage, setCurrentPage } = props;
-
+    const { t } = useTranslation();
 
     // Invoke when user click to request another page.
     const handlePageClick = (event) => {
@@ -18,16 +19,16 @@ function TableUserPaginate(props) {
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Username</th>
+                        <th scope="col">{t('admin.feature.manage-user.username')}</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Role</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">{t('admin.feature.manage-user.role')}</th>
+                        <th scope="col">{t('admin.feature.manage-user.actions')}</th>
                     </tr>
                 </thead>
                 <tbody>
                     {listUsers && listUsers.length === 0 &&
                         <tr>
-                            <td colSpan={5}>Not found data</td>
+                            <td colSpan={5}>{t('admin.feature.manage-user.message')}</td>
                         </tr>
                     }
                     {listUsers && listUsers.length > 0 &&
@@ -39,9 +40,9 @@ function TableUserPaginate(props) {
                                     <td>{item.email}</td>
                                     <td>{item.role}</td>
                                     <td>
-                                        <button className="btn btn-info" onClick={() => props.handleClickBtnView(item)}>View</button>
-                                        <button className="btn btn-warning mx-3" onClick={() => props.handleClickBtnUpdate(item)}>Update</button>
-                                        <button className="btn btn-danger" onClick={() => props.handleClickBtnDelete(item)}>Delete</button>
+                                        <button className="btn btn-info" onClick={() => props.handleClickBtnView(item)}>{t('admin.feature.manage-user.btn-view')}</button>
+                                        <button className="btn btn-warning mx-3" onClick={() => props.handleClickBtnUpdate(item)}>{t('admin.feature.manage-user.btn-update')}</button>
+                                        <button className="btn btn-danger" onClick={() => props.handleClickBtnDelete(item)}>{t('admin.feature.manage-user.btn-delete')}</button>
                                     </td>
                                 </tr>
                             );
@@ -51,12 +52,12 @@ function TableUserPaginate(props) {
             </table>
             <div className="user-pagination">
                 <ReactPaginate
-                    nextLabel="Next >"
+                    nextLabel={t('admin.feature.manage-user.next')}
                     onPageChange={handlePageClick}
                     pageRangeDisplayed={3}
                     marginPagesDisplayed={2}
                     pageCount={pageCount}
-                    previousLabel="< Prev"
+                    previousLabel={t('admin.feature.manage-user.prev')}
                     pageClassName="page-item"
                     pageLinkClassName="page-link"
                     previousClassName="page-item"

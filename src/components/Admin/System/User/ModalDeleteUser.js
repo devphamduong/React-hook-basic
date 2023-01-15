@@ -1,10 +1,13 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { deleteUser } from '../../../../services/apiServices';
 
 function ModalDeleteUser(props) {
     const { show, setShow, userUpdate, currentPage, setCurrentPage } = props;
+    const { t } = useTranslation();
+
     const handleClose = () => {
         setShow(false);
     };
@@ -25,15 +28,15 @@ function ModalDeleteUser(props) {
         <>
             <Modal show={show} onHide={handleClose} backdrop='static'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm delete user</Modal.Title>
+                    <Modal.Title>{t('admin.feature.manage-user.modal-delete.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure to delete this user: email = <b>{userUpdate && userUpdate.email ? userUpdate.email : ''}</b></Modal.Body>
+                <Modal.Body>{t('admin.feature.manage-user.modal-delete.question')}<b>{userUpdate && userUpdate.email ? userUpdate.email : ''}</b>?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Cancel
+                        {t('admin.feature.manage-user.modal-delete.btn-cancel')}
                     </Button>
                     <Button variant="danger" onClick={() => handleDeleteUser()}>
-                        Delete user
+                        {t('admin.feature.manage-user.modal-delete.btn-delete')}
                     </Button>
                 </Modal.Footer>
             </Modal>

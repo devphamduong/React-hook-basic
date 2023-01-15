@@ -3,6 +3,7 @@ import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, Side
 import { FaGem, FaGithub } from 'react-icons/fa';
 import sidebarBg from '../../assets/bg2.jpg';
 import { DiReact } from 'react-icons/di';
+import { useTranslation } from 'react-i18next';
 import { MdDashboard } from 'react-icons/md';
 import './SideBar.scss';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,6 +11,7 @@ import { Link, useNavigate } from 'react-router-dom';
 function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
 
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     return (
         <>
@@ -50,18 +52,18 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                         <MenuItem
                             icon={<MdDashboard />}
                         >
-                            Dashboard
+                            {t('admin.dash-board.title')}
                             <Link to={'/admin'} />
                         </MenuItem>
                     </Menu>
                     <Menu iconShape="circle">
                         <SubMenu
                             icon={<FaGem />}
-                            title='Features'
+                            title={t('admin.feature.title')}
                         >
-                            <MenuItem>Quản lý User<Link to={'/admin/manage-users'} /></MenuItem>
-                            <MenuItem>Quản lý Bài Quiz<Link to={'/admin/manage-quizzes'} /></MenuItem>
-                            <MenuItem>Quản lý Câu Hỏi<Link to={'/admin/manage-questions'} /></MenuItem>
+                            <MenuItem>{t('admin.feature.manage-user.title')}<Link to={'/admin/manage-users'} /></MenuItem>
+                            <MenuItem>{t('admin.feature.manage-quiz.title')}<Link to={'/admin/manage-quizzes'} /></MenuItem>
+                            <MenuItem>{t('admin.feature.manage-question.title')}<Link to={'/admin/manage-questions'} /></MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>

@@ -1,11 +1,14 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { deleteQuiz } from '../../../../services/apiServices';
 
 function ModalDeleteQuiz(props) {
 
+    const { t } = useTranslation();
     const { show, setShow, dataQuiz, getAllQuiz } = props;
+
     const handleClose = () => {
         setShow(false);
     };
@@ -25,15 +28,15 @@ function ModalDeleteQuiz(props) {
         <>
             <Modal show={show} onHide={handleClose} backdrop='static'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Confirm delete quiz</Modal.Title>
+                    <Modal.Title>{t('admin.feature.manage-quiz.manage.modal-delete.title')}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure to delete this quiz: id = <b>{dataQuiz && dataQuiz.id ? dataQuiz.id : ''}</b></Modal.Body>
+                <Modal.Body>{t('admin.feature.manage-quiz.manage.modal-delete.question')}<b>{dataQuiz && dataQuiz.id ? dataQuiz.id : ''}</b>?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Cancel
+                        {t('admin.feature.manage-quiz.manage.modal-delete.btn-cancel')}
                     </Button>
                     <Button variant="danger" onClick={() => handleDeleteQuiz()}>
-                        Delete quiz
+                        {t('admin.feature.manage-quiz.manage.modal-delete.btn-delete')}
                     </Button>
                 </Modal.Footer>
             </Modal>

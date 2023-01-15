@@ -2,11 +2,13 @@ import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FcPlus } from 'react-icons/fc';
+import { useTranslation } from 'react-i18next';
 import { toast } from "react-toastify";
 import { createUser } from '../../../../services/apiServices';
 
 function ModalCreateUser(props) {
 
+    const { t } = useTranslation();
     const { show, setShow, setCurrentPage } = props;
     const handleClose = () => {
         setShow(false);
@@ -62,7 +64,7 @@ function ModalCreateUser(props) {
         <>
             <Modal className="modal-add-user" show={show} onHide={handleClose} size='xl' backdrop='static'>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add new user</Modal.Title>
+                    <Modal.Title>{t('admin.feature.manage-user.modal-update.title')}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form className="row g-3">
@@ -71,39 +73,39 @@ function ModalCreateUser(props) {
                             <input type="email" className="form-control" value={email} onChange={(event) => setEmail(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Username</label>
+                            <label className="form-label">{t('admin.feature.manage-user.modal-update.username')}</label>
                             <input type="text" className="form-control" value={username} onChange={(event) => setUsername(event.target.value)} />
                         </div>
                         <div className="col-md-6">
-                            <label className="form-label">Password</label>
+                            <label className="form-label">{t('admin.feature.manage-user.modal-update.password')}</label>
                             <input type="password" className="form-control" value={password} onChange={(event) => setPassword(event.target.value)} />
                         </div>
                         <div className="col-md-4">
-                            <label className="form-label">Role</label>
+                            <label className="form-label">{t('admin.feature.manage-user.modal-update.role')}</label>
                             <select className="form-select" value={role} onChange={(event) => setRole(event.target.value)}>
                                 <option value={'USER'}>USER</option>
                                 <option value={'ADMIN'}>ADMIN</option>
                             </select>
                         </div>
                         <div className="col-md-12">
-                            <label className="form-label label-upload" htmlFor="labelUpload"><FcPlus /><span>Upload File Image</span></label>
+                            <label className="form-label label-upload" htmlFor="labelUpload"><FcPlus /><span>{t('admin.feature.manage-user.modal-update.btn-upload')}</span></label>
                             <input type="file" hidden id="labelUpload" onChange={(event) => handleUploadImage(event)} />
                         </div>
                         <div className="col-md-12 img-preview">
                             {previewImg ?
                                 <img src={previewImg} alt="previewImage" />
                                 :
-                                <span>Preview Image</span>
+                                <span>{t('admin.feature.manage-user.modal-update.preview-img')}</span>
                             }
                         </div>
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
-                        Close
+                        {t('admin.feature.manage-user.modal-update.btn-close')}
                     </Button>
                     <Button variant="primary" onClick={() => handleCreateUser()}>
-                        Create user
+                        {t('admin.feature.manage-user.modal-update.btn-save')}
                     </Button>
                 </Modal.Footer>
             </Modal>
