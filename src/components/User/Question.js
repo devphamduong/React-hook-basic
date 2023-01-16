@@ -2,10 +2,11 @@ import _ from "lodash";
 import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 import Lightbox from "react-awesome-lightbox";
+import { AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 
 function Question(props) {
 
-    const { dataQuiz, currentQuestion, handleCheckAns } = props;
+    const { dataQuiz, currentQuestion, handleCheckAns, isShowAnswer } = props;
     const { t } = useTranslation();
     const [isPreviewImg, setIsPreviewImg] = useState(false);
     if (_.isEmpty(dataQuiz)) {
@@ -38,10 +39,21 @@ function Question(props) {
                         return (
                             <div key={`answer-${index}`} className='answer-child'>
                                 <div className="form-check">
-                                    <input className="form-check-input" type="checkbox" checked={item.isSelected} onChange={(event) => handleCheckBox(event, item.id, dataQuiz.questionId)} />
-                                    <label className="form-check-label">
+                                    <input id={`checkbox-${item}-${index}`} className="form-check-input" type="checkbox" checked={item.isSelected} onChange={(event) => handleCheckBox(event, item.id, dataQuiz.questionId)} disabled={props.isSubmitQuiz} />
+                                    <label htmlFor={`checkbox-${item}-${index}`} className="form-check-label">
                                         {item.description}
                                     </label>
+                                    {isShowAnswer &&
+                                        <>
+                                            {item.isSelected && !item.isCorrect
+                                                && <AiOutlineClose className='incorrect' />
+                                            }
+
+                                            {item.isCorrect
+                                                && <AiOutlineCheck className='correct' />
+                                            }
+                                        </>
+                                    }
                                 </div>
                             </div>
                         );

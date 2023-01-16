@@ -25,7 +25,7 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                 <SidebarHeader>
                     <div
                         style={{
-                            padding: '24px',
+                            padding: '24px 0 24px 0',
                             textTransform: 'uppercase',
                             fontWeight: 'bold',
                             fontSize: 14,
@@ -37,9 +37,9 @@ function SideBar({ image, collapsed, toggled, handleToggleSidebar }) {
                     >
                         <div className='sidebar-header'>
                             {collapsed ?
-                                <DiReact size={'3em'} color={'00bfff'} /> :
+                                <DiReact style={{ cursor: 'pointer' }} size={'3em'} color={'00bfff'} className='brand-icon' onClick={() => { navigate('/'); }} /> :
                                 <>
-                                    <DiReact size={'3em'} color={'00bfff'} />
+                                    <DiReact style={{ cursor: 'pointer' }} size={'3em'} color={'00bfff'} className='brand-icon' onClick={() => { navigate('/'); }} />
                                     <span onClick={() => { navigate('/'); }}>Pham Chu Duong</span>
                                 </>
                             }

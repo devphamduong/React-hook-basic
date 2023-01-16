@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useTranslation } from 'react-i18next';
 
 function ModalResult(props) {
-    const { show, setShow, dataModalResult } = props;
+    const { show, setShow, dataModalResult, handleShowAnswer } = props;
     const { t } = useTranslation();
 
     const handleClose = () => {
@@ -21,7 +21,7 @@ function ModalResult(props) {
                     <div>{t('user.detail-quiz.modal-result.total-correct-answer')}<b>{dataModalResult.countCorrect}</b></div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="secondary" onClick={() => { handleClose(); handleShowAnswer(); }}>
                         {t('user.detail-quiz.modal-result.show-answer')}
                     </Button>
                     <Button variant="danger" onClick={handleClose}>

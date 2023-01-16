@@ -1,7 +1,16 @@
+.detail-quiz-breadcrumb {
+    padding: 25px 50px;
+
+    a {
+        text-decoration: none !important;
+    }
+}
+
 .detail-quiz-container {
-    display: flex;
-    gap    : 20px;
-    padding: 50px;
+    display    : flex;
+    gap        : 20px;
+    padding-top: 20px !important;
+    padding    : 50px;
 
     .left {
         border       : 2px solid #ccc;
@@ -103,4 +112,14 @@
             }
         }
     }
+}
+
+.correct {
+    color    : green;
+    font-size: 25px;
+}
+
+.incorrect {
+    color    : green;
+    font-size: 25px;
 }

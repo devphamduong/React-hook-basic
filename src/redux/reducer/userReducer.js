@@ -1,5 +1,4 @@
-
-import { FETCH_USER_LOGIN_SUCCESS, FETCH_USER_LOGOUT_SUCCESS } from '../action/userAction';
+import { FETCH_USER_LOGIN_SUCCESS, FETCH_USER_LOGOUT_SUCCESS, FETCH_USER_UPDATE_PROFILE_SUCCESS } from '../action/userAction';
 const INITIAL_STATE = {
     account: {
         access_token: '',
@@ -38,6 +37,19 @@ const userReducer = (state = INITIAL_STATE, action) => {
                     email: ''
                 },
                 isAuthenticated: false
+            };
+        case FETCH_USER_UPDATE_PROFILE_SUCCESS:
+            return {
+                ...state,
+                account: {
+                    access_token: action.payload.access_token,
+                    refresh_token: action.payload.refresh_token,
+                    username: action.payload.username,
+                    image: action.payload.image,
+                    role: action.payload.role,
+                    email: action.payload.email
+                },
+                isAuthenticated: true
             };
         default: return state;
     }
