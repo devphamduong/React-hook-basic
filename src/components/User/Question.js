@@ -48,7 +48,6 @@ function Question(props) {
                                             {item.isSelected && !item.isCorrect
                                                 && <AiOutlineClose className='incorrect' />
                                             }
-
                                             {item.isCorrect
                                                 && <AiOutlineCheck className='correct' />
                                             }

@@ -70,6 +70,7 @@ function DetailQuiz(props) {
         }
         setCurrentQuestion(currentQuestion - 1);
     };
+
     const handleNext = () => {
         if (dataQuiz && dataQuiz.length > currentQuestion + 1) {
             setCurrentQuestion(currentQuestion + 1);
@@ -150,7 +151,7 @@ function DetailQuiz(props) {
                     setDataQuiz(dataQuizClone);
                 }
             } else {
-                alert('Somthing wrongs....');
+                alert('Something wrongs...!');
             }
         }
     };
